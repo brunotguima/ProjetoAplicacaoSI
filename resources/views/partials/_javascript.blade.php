@@ -7,4 +7,5 @@
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
   $('select.dropdown').dropdown()
+  $('.ui.dropdown').dropdown()
 </script>

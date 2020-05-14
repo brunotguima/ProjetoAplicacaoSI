@@ -43,7 +43,7 @@ class RoleController extends Controller
      */
     public function create()
     {
-        $permission = Permission::get();
+        $permission = Permission::pluck('name', 'name')->all();
         return view('roles.create',compact('permission'));
     }
     
