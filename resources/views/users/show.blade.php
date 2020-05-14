@@ -1,41 +1,25 @@
-@extends('layouts.app')
-
+@extends('main')
 
 @section('content')
-<div class="row">
-    <div class="col-lg-12 margin-tb">
-        <div class="pull-left">
-            <h2>Ver Usuário</h2>
-        </div>
-        <div class="pull-right">
-            <a class="btn btn-primary" href="{{ route('users.index') }}"> Retornar</a>
-        </div>
-    </div>
-</div>
+<h2 class="ui dividing header">Ver Usuário</h2>
 
-
-<div class="row">
-    <div class="col-xs-12 col-sm-12 col-md-12">
-        <div class="form-group">
-            <strong>Nome:</strong>
-            {{ $user->name }}
-        </div>
+<div class="ui card">
+    <div class="image" style="background-color: grey;">
+      
     </div>
-    <div class="col-xs-12 col-sm-12 col-md-12">
-        <div class="form-group">
-            <strong>Email:</strong>
-            {{ $user->email }}
-        </div>
+    <div class="content">
+      <a class="header">{{ $user->name }}</a>
+      <div class="meta">
+        <span class="date">{{ $user->email }}</span>
+      </div>
+      <div class="description">
+        <strong>Tipos:</strong>
+        @if(!empty($user->getRoleNames()))
+            @foreach($user->getRoleNames() as $v)
+                <label class="ui green horizontal label">{{ $v }}</label>
+            @endforeach
+        @endif
+      </div>
     </div>
-    <div class="col-xs-12 col-sm-12 col-md-12">
-        <div class="form-group">
-            <strong>Tipos:</strong>
-            @if(!empty($user->getRoleNames()))
-                @foreach($user->getRoleNames() as $v)
-                    <label class="badge badge-success">{{ $v }}</label>
-                @endforeach
-            @endif
-        </div>
-    </div>
-</div>
+  </div>
 @endsection
