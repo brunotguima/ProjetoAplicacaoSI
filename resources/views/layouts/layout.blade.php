@@ -1,64 +1,43 @@
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-
-    <title>{{ config('app.name', 'Laravel') }}</title>
-
-</head>
-<body>
-  <header class="ui header">
-<div class="ui container">
-  <!-- Menu superior -->
-  @if(Auth::check())
-<div class="ui pointing menu">
-  <a href="/" class="active item" id="inicio">
-    Inicio
-  </a>
-  <a href="/veiculos" class="item" id="veiculos">
-    Veiculos
-  </a>
-  <a href="/movimentacao" class="item" id="movimentacoes">
-    Movimentações
-  </a>
-  <div class="right menu">
-    <button class="ui secondary button">
-    <a href="">{{Auth::user()->name}}</a>
-    </button>
-<form action="/logout" method="post">
-  <input type="submit" class="ui secondary basic button" value="Logout">
-  {{ csrf_field() }}
-</form>
-  </div>
-</div>
-@endif
-</div>
-</header>
-  <!--Fim menu superior -->
-  <main>
-  <div class="ui container">
-    @if(Auth::Check())
-    @yield('content')   
-   @else
-       <div class="ui container">
-        <div class="ui vertically grid">
-          <div class="row"> </div>
-           <div class="row">
-            <img class="ui small rounded centered image" src="/Images/logo.png" sizes="150px">
-           </div>
-           <div class="two column row">
-            <button class="fluid ui massive primary basic button"> <a href="{{route('login')}}">Faça o Login</a></button>
-            <button class="fluid ui massive positive basic button"><a href="{{route('register')}}">Registre-se</a></button>
+  <head>
+    @include('partials/_head')
+  </head>
+  <body>  
+    <div class="ui container">
+        @include('./partials/_nav')
+        <main>
+          <div class="ui container">
+            @if(Auth::Check())
+            @yield('content')   
+           @else
+               <div class="ui container">
+                <div class="ui vertically grid">
+                  <div class="row"> </div>
+                   <div class="row">
+                    <img class="ui small rounded centered image" src="/Images/logo.png" sizes="150px">
+                   </div>
+                   <div class="two column row">
+                    <button class="fluid ui massive primary basic button"> <a href="{{route('login')}}">Faça o Login</a></button>
+                    <button class="fluid ui massive positive basic button"><a href="{{route('register')}}">Registre-se</a></button>
+                  </div>
+                  <div class="four column row"></div>
+                 </div>
+               </div>
+           @endif
           </div>
-          <div class="four column row"></div>
-         </div>
-       </div>
-   @endif
-  </div>
-  </main>
+          </main>
+    </div> 
+    <footer>
+        @include('partials._footer')
+    </footer> 
+
+    @include('./partials/_javascript')
+
+  </body>
+  
+
+  
   <footer>
 
   </footer>

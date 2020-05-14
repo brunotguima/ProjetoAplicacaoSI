@@ -1,4 +1,4 @@
-@extends('main')
+@extends('/layouts/layout')
 
 @section('content')
 <h2 class="ui dividing header">Gerenciamento de Usuários <a href="{{route('users.create')}}"><i class="plus red icon" style="float: right"></i></a></h2>

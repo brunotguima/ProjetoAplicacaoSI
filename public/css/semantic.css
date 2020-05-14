@@ -40302,3 +40302,10 @@ body.pushable > .pusher {
 /*******************************
          Site Overrides
 *******************************/
+@media (min-height: 320px) {
+  .ui.foot { /* Increased specificity for SO snippet priority */
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+  }
+}
