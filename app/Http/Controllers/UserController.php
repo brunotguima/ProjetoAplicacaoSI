@@ -9,6 +9,7 @@ use Spatie\Permission\Models\Role;
 use DB;
 use Hash;
 use Auth;
+use Illuminate\Support\Arr;
     
 class UserController extends Controller
 {
@@ -57,7 +58,7 @@ class UserController extends Controller
         $user->assignRole($request->input('roles'));
     
         return redirect()->route('users.index')
-                        ->with('success','User created successfully');
+                        ->with('success','Usuário Criado com Sucesso!!');
     }
     
     /**
@@ -107,7 +108,7 @@ class UserController extends Controller
         if(!empty($input['password'])){ 
             $input['password'] = Hash::make($input['password']);
         }else{
-            $input = array_except($input,array('password'));    
+            $input = Arr::except($input,array('password'));    
         }
     
         $user = User::find($id);
@@ -117,7 +118,7 @@ class UserController extends Controller
         $user->assignRole($request->input('roles'));
     
         return redirect()->route('users.index')
-                        ->with('success','Usuário Atualizado com sucesso');
+                        ->with('success','Usuário Atualizado com sucesso!');
     }
     
     /**
@@ -130,6 +131,6 @@ class UserController extends Controller
     {
         User::find($id)->delete();
         return redirect()->route('users.index')
-                        ->with('success','User deleted successfully');
+                        ->with('success','Usuário deletado com sucesso!');
     }
 }
