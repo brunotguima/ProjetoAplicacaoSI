@@ -18,6 +18,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/movimentacao', function () {
+    return view('movimentacao.create');
+});
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

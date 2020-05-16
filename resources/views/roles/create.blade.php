@@ -3,7 +3,6 @@
 @section('content')
 <h2 class="ui dividing header">Criar nova função</h2>
 
-
 @if (count($errors) > 0)
     <div class="alert alert-danger">
         <strong>Eita!</strong> Alguns problemas ocorreram.<br><br>
@@ -14,7 +13,6 @@
         </ul>
     </div>
 @endif
-
 
 {!! Form::open(array('route' => 'roles.store','method'=>'POST', 'class' => 'ui form')) !!}
     <div class="field">

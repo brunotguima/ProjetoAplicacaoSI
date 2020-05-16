@@ -5,6 +5,10 @@
   integrity="sha256-t8GepnyPmw9t+foMh3mKNvcorqNHamSKtKRxxpUEgFI=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+{!! Html::script('js/webcodecamjs.js') !!}
+{!! Html::script('js/qrcodelib.js') !!}
+{!! Html::script('js/filereader.js') !!}
+{!! Html::script('js/DecoderWorker.js') !!}
 <script>
   $('select.dropdown').dropdown()
   $('.ui.dropdown').dropdown()
