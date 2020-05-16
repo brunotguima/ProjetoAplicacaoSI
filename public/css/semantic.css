@@ -89,7 +89,7 @@ footer,
 header,
 nav,
 section {
-  display: block;
+  display: initial;
 }
 
 /**
@@ -40308,4 +40308,8 @@ body.pushable > .pusher {
     bottom: 0;
     width: 100%;
   }
+}
+
+.menuemcima{
+  position: static;
 }

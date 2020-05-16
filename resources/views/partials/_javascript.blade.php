@@ -5,7 +5,10 @@
   integrity="sha256-t8GepnyPmw9t+foMh3mKNvcorqNHamSKtKRxxpUEgFI=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="/js/jquery.printElement.js"></script>
 <script>
   $('select.dropdown').dropdown()
   $('.ui.dropdown').dropdown()
 </script>
+<script src="{{ asset('js/semantic.js') }}" type="text/js"></script>
+@yield('javascript')
