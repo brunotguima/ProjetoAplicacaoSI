@@ -1,29 +1,29 @@
 @extends('main')
 
-@section('content')    
-<div class="ui two column stackable grid" id="gridMovimentacao">      
+@section('content')
+<div class="ui two column stackable grid" id="gridMovimentacao">
     <div class="column">
         <h1 id="mudar" class="ui dividing header slideInLeft">Cadastrar Saída</h1>
-        
+
         <canvas class="ui fluid container" style="margin-bottom: 5px"></canvas>
-        <select class="ui dropdown" id="camera"></select>        
+        <select class="ui dropdown" id="camera"></select>
     </div>
     <div class="column">
         <h1 class="ui header right aligned animated slideInRight" id="alunos">
             <button class="ui blue button" id="clear">Limpar</button>
             &nbsp;<button class="ui blue button" style="margin-right: 5px;" id="troca">Entrada</button></h1>
-            <input type="hidden" id="funcionario" name="funcionario_id" value="">
-            <input type="hidden" id="tipo" value="1">
-            <input type="hidden" id="created_at" name="created_at" value="">
-            <input type="hidden" id="ocorrencia" name="ocorrencia_id" value="1">
-            <input type="hidden" id="foto" name="foto" value="">
+        <input type="hidden" id="funcionario" name="funcionario_id" value="">
+        <input type="hidden" id="tipo" value="1">
+        <input type="hidden" id="created_at" name="created_at" value="">
+        <input type="hidden" id="ocorrencia" name="ocorrencia_id" value="1">
+        <input type="hidden" id="foto" name="foto" value="">
         </h1>
         <div class="ui very padded center aligned segment grid">
             <div class="fluid content" id="feedback">
                 <h1>PASSE SEU CRACHÁ</h1>
             </div>
-        </div>         
-        <br>     
+        </div>
+        <br>
         <div class="ui two cards">
             <div class="card" id="cardFuncionario" style="display: none">
                 <div class="content">
@@ -84,8 +84,8 @@
 @endsection
 
 @section('scripts')
-    <script>
-        $(document).ready(function(){
+<script>
+    $(document).ready(function(){
             var entrada = false;
             var frequencia = $('#troca').click( function() {
                 $(this).text($(this).text() == 'Cadastrar Saída' ? 'Cadastrar Entrada' : 'Cadastrar Saída').animate();
@@ -97,19 +97,32 @@
 
         function leitura(code) {
             if($('#funcionario').val() == '') {
+                axios.get('http://localhost:8000/veiculos/'+code)
+                .then(response => {
+                    if(response.status == 200) {
+
                 $('#cardFuncionario').show('slow')
                 $('#funcionario').val(code)
                 $('#feedback').html('<h1>PASSE O QR DO CARRO</h1>')
             }else{
-                $('#cardCarro').show('slow')
-                $('#cardConfirma').show('slow')
-                $('#feedback').html('<h1>CONFIRME SUAS INFORMAÇÕES</h1>')
+                axios.get('http://localhost:8000/veiculos/'+code)
+                .then(response => {
+                    if(response.status == 200) {
+                        this.dados = response.data
+                        $('#cardCarro .header').text(dados.marca + ' - ' + dados.modelo)
+                        $('#cardCarro .meta').text(dados.placa)
+                        $('#cardCarro .description').text(dados.kmatual + ' Km')
+                        $('#cardCarro').show('slow')
+                        $('#cardConfirma').show('slow')
+                        $('#feedback').html('<h1>CONFIRME SUAS INFORMAÇÕES</h1>')
+                    }
+                })
             }
         }
-    </script>
+</script>
 
-    <script>
-      var arg = {
+<script>
+    var arg = {
         resultFunction: function(result) {
             console.log(result.code)
             leitura(result.code)
@@ -121,6 +134,6 @@
         	decoder.stop().play();
       });
 
-   </script>
-       
+</script>
+
 @endsection

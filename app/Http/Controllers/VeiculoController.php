@@ -76,7 +76,7 @@ class VeiculoController extends Controller
      */
     public function show(Veiculo $veiculo)
     {
-        //
+        return response()->json($veiculo);
     }
 
     /**
