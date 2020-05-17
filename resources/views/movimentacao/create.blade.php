@@ -97,13 +97,18 @@
 
         function leitura(code) {
             if($('#funcionario').val() == '') {
-                axios.get('http://localhost:8000/veiculos/'+code)
+                axios.get('http://localhost:8000/users/json/'+code)
                 .then(response => {
                     if(response.status == 200) {
-
-                $('#cardFuncionario').show('slow')
-                $('#funcionario').val(code)
-                $('#feedback').html('<h1>PASSE O QR DO CARRO</h1>')
+                        this.dados = response.data
+                        $('#cardFuncionario .header').text(dados.nome)
+                        $('#cardFuncionario .meta').text(dados.id)
+                        $('#cardFuncionario .description').text(dados.cargo)
+                        $('#cardFuncionario').show('slow')
+                        $('#funcionario').val(code)
+                        $('#feedback').html('<h1>PASSE O QR DO CARRO</h1>')
+                    }
+                })
             }else{
                 axios.get('http://localhost:8000/veiculos/'+code)
                 .then(response => {

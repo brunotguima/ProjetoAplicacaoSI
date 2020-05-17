@@ -73,6 +73,12 @@ class UserController extends Controller
         return view('users.show',compact('user'));
     }
     
+    public function showJSON($id)
+    {
+        $user = User::find($id);
+        return response()->json($user);
+    }
+    
     /**
      * Show the form for editing the specified resource.
      *
