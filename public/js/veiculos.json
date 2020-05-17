@@ -3,5 +3,6 @@
     {"tipo": "C", "marca": "FIAT", "modelo": "Mobi 1.0 Evo Easy", "ano": 2018, "cor": "Branco", "placa": "BBB-0000", "tanque": 85, "renavam": "38160248733", "kmcadastro": 8000, "kmatual": 95000},
     {"tipo": "C", "marca": "Volkswagen", "modelo": "uP! Like MPI", "ano": 2015, "cor": "Branco", "placa": "CCC-0000", "tanque": 85, "renavam": "43797581697", "kmcadastro": 9000, "kmatual": 105000},
     {"tipo": "C", "marca": "Chevrolet", "modelo": "Montana 1.4 MPFI LS CS 8V Flex MANUAL", "ano": 2012, "cor": "Branco", "placa": "DDD-0000", "tanque": 85, "renavam": "76138505195", "kmcadastro": 110000, "kmatual": 115000},
-    {"tipo": "C", "marca": "Renault", "modelo": "Kwid 1.0 Life", "ano": 2020, "cor": "Branco", "placa": "EEE-0000", "tanque": 85, "renavam": "57698213177", "kmcadastro": 0, "kmatual": 500}
+    {"tipo": "C", "marca": "Renault", "modelo": "Kwid 1.0 Life", "ano": 2020, "cor": "Branco", "placa": "EEE-0000", "tanque": 85, "renavam": "57698213177", "kmcadastro": 0, "kmatual": 500},
+    {"tipo": "C", "marca": "Volkswagen", "modelo": "Fusca 1500", "ano": 1972, "cor": "Laranja", "placa": "BMN-9639", "tanque": 50, "renavam": "50748236585", "kmcadastro": 542158, "kmatual": 550000}
 ]

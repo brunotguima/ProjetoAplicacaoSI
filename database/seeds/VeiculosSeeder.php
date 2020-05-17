@@ -17,18 +17,34 @@ class VeiculosSeeder extends Seeder
 
         foreach ($data as $item)
         {
-            Veiculo::create([
-                'tipo' => $item->tipo,
-                'marca' => $item->marca,
-                'modelo' =>$item->modelo,
-                'ano' => $item->ano,
-                'cor' => $item->cor,
-                'placa' => $item->placa,
-                'tanque' => $item->tanque,
-                'renavam' => $item->renavam,
-                'kmcadastro' => $item->kmcadastro,
-                'kmatual' => $item->kmatual,
-            ]);
+            if($item->ano == 1972) {
+                Veiculo::create([
+                    'id' => 19614,
+                    'tipo' => $item->tipo,
+                    'marca' => $item->marca,
+                    'modelo' =>$item->modelo,
+                    'ano' => $item->ano,
+                    'cor' => $item->cor,
+                    'placa' => $item->placa,
+                    'tanque' => $item->tanque,
+                    'renavam' => $item->renavam,
+                    'kmcadastro' => $item->kmcadastro,
+                    'kmatual' => $item->kmatual,
+                ]);
+            }else{
+                Veiculo::create([
+                    'tipo' => $item->tipo,
+                    'marca' => $item->marca,
+                    'modelo' =>$item->modelo,
+                    'ano' => $item->ano,
+                    'cor' => $item->cor,
+                    'placa' => $item->placa,
+                    'tanque' => $item->tanque,
+                    'renavam' => $item->renavam,
+                    'kmcadastro' => $item->kmcadastro,
+                    'kmatual' => $item->kmatual,
+                ]);
+            }
         }    
     }
 }
