@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Saida;
+use App\Veiculo;
 use Illuminate\Http\Request;
 
 class SaidaController extends Controller
@@ -33,9 +34,21 @@ class SaidaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $req)
     {
-        //
+        $request = json_decode($req->getContent())->data;
+
+        $saida = new Saida();
+
+        $veiculo = Veiculo::find((int)$request->carro_id);
+
+        //dd($veiculo);
+
+        $saida->veiculo()->associate($veiculo);
+
+        $saida->save();
+
+        return response()->json($saida);
     }
 
     /**

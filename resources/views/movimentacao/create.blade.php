@@ -70,7 +70,7 @@
                                 <i class="ui cancel icon"></i>
                                 Cancelar
                             </button>
-                            <button class="ui positive basic huge button">
+                            <button class="ui positive basic huge button" onclick="confirmar()">
                                 <i class="ui check icon"></i>
                                 Confirmar
                             </button>
@@ -85,6 +85,8 @@
 
 @section('scripts')
 <script>
+    var funcionario, carro;
+
     $(document).ready(function(){
             var entrada = false;
             var frequencia = $('#troca').click( function() {
@@ -104,6 +106,7 @@
                         $('#cardFuncionario .header').text(dados.nome)
                         $('#cardFuncionario .meta').text(dados.id)
                         $('#cardFuncionario .description').text(dados.cargo)
+                        funcionario = dados.id;
                         $('#cardFuncionario').show('slow')
                         $('#funcionario').val(code)
                         $('#feedback').html('<h1>PASSE O QR DO CARRO</h1>')
@@ -117,12 +120,21 @@
                         $('#cardCarro .header').text(dados.marca + ' - ' + dados.modelo)
                         $('#cardCarro .meta').text(dados.placa)
                         $('#cardCarro .description').text(dados.kmatual + ' Km')
+                        carro = dados.id
                         $('#cardCarro').show('slow')
                         $('#cardConfirma').show('slow')
                         $('#feedback').html('<h1>CONFIRME SUAS INFORMAÇÕES</h1>')
                     }
                 })
             }
+        }
+
+        function confirmar() {
+            axios.post('http://localhost:8000/api/saidas', {
+                data: {
+                    'carro_id': carro
+                }
+            })
         }
 </script>
 
