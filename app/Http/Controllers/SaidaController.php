@@ -37,21 +37,28 @@ class SaidaController extends Controller
      */
     public function store(Request $req)
     {
-        $request = json_decode($req->getContent())->data;
+        // $request = json_decode($req->getContent())->data;
+        $request = json_decode($req->getContent());
 
-        $saida = new Saida();
+        $validaSaida = Saida::all()->where('veiculo_id', (int)$request->carro_id)->where('entrada_id', null);
+        
+        if ($validaSaida->count() == 0) {
+            $saida = new Saida();
 
-        $veiculo = Veiculo::find((int)$request->carro_id);
+            $veiculo = Veiculo::find((int)$request->carro_id);
 
-        $funcionario = User::find((int)$request->user_id);
+            $funcionario = User::find((int)$request->user_id);
 
-        $saida->veiculo()->associate($veiculo);
+            $saida->veiculo()->associate($veiculo);
 
-        $saida->user()->associate($funcionario);
+            $saida->user()->associate($funcionario);
 
-        $saida->save();
+            $saida->save();
 
-        return response()->json($saida);
+            return response()->json(["dados" => $saida, "erros" => "0"]);
+        }else{
+            return response()->json(["dados" => $validaSaida, "erros" => "Carro sem entrada cadastrada"]);
+        }
     }
 
     /**
