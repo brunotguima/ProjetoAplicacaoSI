@@ -1,4 +1,4 @@
-@extends('main')
+@extends('/layouts/layout')
 
 @section('content')
 <h2 class="ui dividing header">Editar Usuário</h2>

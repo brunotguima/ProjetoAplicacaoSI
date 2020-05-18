@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Veiculo;
 use Illuminate\Http\Request;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class VeiculoController extends Controller
 {
@@ -122,9 +123,14 @@ class VeiculoController extends Controller
      */
     public function destroy($id)
     {
-        $veiculoDelete = Veiculo::findOrFail($id);
+        $veiculoDelete = Veiculo::find($id);
         $veiculoDelete->delete();
 
         return redirect('/veiculos')->with('sucess','O veiculo foi deletado com sucesso!');
+    }
+
+    public function createQR($id)
+    {
+        return QrCode::size(250)->generate($id);
     }
 }

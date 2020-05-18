@@ -10,7 +10,10 @@
 {!! Html::script('js/filereader.js') !!}
 {!! Html::script('js/DecoderWorker.js') !!}
 {!! Html::script('js/moment.js') !!}
+<script src="/js/jquery.printElement.js"></script>
 <script>
   $('select.dropdown').dropdown()
   $('.ui.dropdown').dropdown()
 </script>
+<script src="{{ asset('js/semantic.js') }}" type="text/js"></script>
+@yield('javascript')
