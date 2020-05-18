@@ -84,11 +84,53 @@
     </div>
 </div>
 
-<div class="ui bottom attached transition in fade tab" data-tab="saidaok" id="saidaok">
+<div class="ui bottom attached transition in fade tab" data-tab="entrada" id="entrada">
+    <div class="ui container">
+        <div class="ui two column segment grid">
+            <div class="column">
+                <div class="ui cards">
+                    <div class="ui fluid card" id="cardResumoSaida">
+                        <div class="center aligned content">
+                            <div class="header">
+                                Confirma as informações?
+                            </div>
+                            <div class="meta">
+                                Esta ação não poderá ser desfeita
+                            </div>
+                            <div class="description">
+                                154872 Km
+                            </div>    
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="column">
+                <div class="ui huge form">
+                    <div class="field">
+                        <label>Digite a quilometragem atual do carro</label>
+                        <input type="text" name="km" id="km">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="ui bottom attached transition in fade tab" data-tab="ok" id="ok">
     <div class="ui container">
         <div class="ui very padded center aligned segment grid">
             <div class="fluid content" id="feedback">
-                <h1 class="ui green header">SAÍDA APROVADA</h1>
+                <h1 class="ui green header" id="txtOK">SAÍDA APROVADA</h1>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="ui bottom attached transition in fade tab" data-tab="erro" id="erro">
+    <div class="ui container">
+        <div class="ui very padded center aligned segment grid">
+            <div class="fluid content" id="feedback">
+                <h1 class="ui red header" id="txtErro">SAÍDA APROVADA</h1>
             </div>
         </div>
     </div>
@@ -97,7 +139,7 @@
 
 @section('scripts')
 <script>
-    var funcionario, carro;
+    var funcionario, carro, res;
 
     $(document).ready(function(){
             $.tab('change tab', 'mov');
@@ -150,9 +192,24 @@
                 }
             })
             .then(response => {
+                this.dados = response.data.dados
+                res = dados
                 if(response.status == 200) {
-                    $.tab('change tab', 'saidaok');
+                    if(response.data.erros == 0) {
+                        $('#txtOK').text('SAÍDA LIBERADA')
+                        $.tab('change tab', 'ok');
+                    }else{
+                        $('#cardResumoSaida .header').text(dados.user.name)
+                        $('#cardResumoSaida .meta').text(moment(dados.created_at).format('DD/MM/YYYY hh:mm:ss'))
+                        $('#cardResumoSaida .description').text(dados.veiculo.modelo)
+
+                        $.tab('change tab', 'entrada')
+                    }
                 }
+            })
+            .catch(error => {
+                $('#txtErro').text(error.message.toUpperCase())
+                $.tab('change tab', 'erro');
             })
         }
 </script>

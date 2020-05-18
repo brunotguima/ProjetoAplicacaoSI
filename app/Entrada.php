@@ -13,6 +13,6 @@ class Entrada extends Model
 
     public function veiculo()
     {
-        return $this->belongsTo('App\Veiculo');
+        return $this->belongsTo('App\Veiculo', 'veiculo_id');
     }
 }

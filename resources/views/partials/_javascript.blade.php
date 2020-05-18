@@ -9,6 +9,7 @@
 {!! Html::script('js/qrcodelib.js') !!}
 {!! Html::script('js/filereader.js') !!}
 {!! Html::script('js/DecoderWorker.js') !!}
+{!! Html::script('js/moment.js') !!}
 <script>
   $('select.dropdown').dropdown()
   $('.ui.dropdown').dropdown()
