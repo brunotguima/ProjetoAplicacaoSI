@@ -41,13 +41,9 @@ class SaidaController extends Controller
 
         $saida = new Saida();
 
-        // dd($request);
-
         $veiculo = Veiculo::find((int)$request->carro_id);
 
         $funcionario = User::find((int)$request->user_id);
-
-        //dd($veiculo);
 
         $saida->veiculo()->associate($veiculo);
 
