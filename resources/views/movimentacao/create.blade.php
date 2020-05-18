@@ -132,7 +132,8 @@
         function confirmar() {
             axios.post('http://localhost:8000/api/saidas', {
                 data: {
-                    'carro_id': carro
+                    'carro_id': carro,
+                    'user_id': funcionario
                 }
             })
         }

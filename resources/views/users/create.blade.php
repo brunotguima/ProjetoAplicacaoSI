@@ -20,19 +20,23 @@
 {!! Form::open(array('route' => 'users.store','method'=>'POST','class' =>'ui form')) !!}
 <div class="field">
     <strong>Nome:</strong>
-    {!! Form::text('name', null, array('placeholder' => 'Nome','class' => 'form-control')) !!}
+    {!! Form::text('name', null, array('placeholder' => 'Nome')) !!}
 </div>
 <div class="field">
-    <strong>Email:</strong>
-    {!! Form::text('email', null, array('placeholder' => 'Email','class' => 'form-control')) !!}
+  <strong>Email:</strong>
+  {!! Form::text('email', null, array('placeholder' => 'Email')) !!}
+</div>
+<div class="field">
+  <strong>Cargo:</strong>
+  {!! Form::text('cargo', null, array('placeholder' => 'Cargo na empresa')) !!}
 </div>
 <div class="field">
     <strong>Senha:</strong>
-    {!! Form::password('password', array('placeholder' => 'Senha','class' => 'form-control')) !!}
+    {!! Form::password('password', array('placeholder' => 'Senha')) !!}
 </div>
 <div class="field">
     <strong>Confirmar Senha:</strong>
-    {!! Form::password('confirm-password', array('placeholder' => 'Confirmar Senha','class' => 'form-control')) !!}
+    {!! Form::password('confirm-password', array('placeholder' => 'Confirmar Senha')) !!}
 </div>
 <div class="field">
     <strong>Tipos de Funcionário:</strong>

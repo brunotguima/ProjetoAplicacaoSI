@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Saida;
 use App\Veiculo;
+use App\User;
 use Illuminate\Http\Request;
 
 class SaidaController extends Controller
@@ -40,11 +41,17 @@ class SaidaController extends Controller
 
         $saida = new Saida();
 
+        // dd($request);
+
         $veiculo = Veiculo::find((int)$request->carro_id);
+
+        $funcionario = User::find((int)$request->user_id);
 
         //dd($veiculo);
 
         $saida->veiculo()->associate($veiculo);
+
+        $saida->user()->associate($funcionario);
 
         $saida->save();
 

@@ -8,12 +8,14 @@
       
     </div>
     <div class="content">
-      <a class="header">{{ $user->name }}</a>
+      <a class="header">{{ $user->name . ' (' . $user->id . ')' }}</a>
       <div class="meta">
         <span class="date">{{ $user->email }}</span>
+        <br>
+        <span class="date">{{ $user->cargo }}</span>
       </div>
       <div class="description">
-        <strong>Tipos:</strong>
+        <strong>Permissões:</strong>
         @if(!empty($user->getRoleNames()))
             @foreach($user->getRoleNames() as $v)
                 <label class="ui green horizontal label">{{ $v }}</label>

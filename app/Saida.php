@@ -16,4 +16,7 @@ class Saida extends Model
         return $this->belongsTo('App\Veiculo');
     }
 
+    public function user() {
+        return $this->belongsTo('App\User');
+    }
 }

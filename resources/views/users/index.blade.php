@@ -8,9 +8,10 @@
   <tr> 
     <th>No</th>
     <th>Nome</th>
+    <th>Cargo</th>
     <th>Email</th>
     <th>Tipos</th>
-    <th width="280px">Action</th>
+    <th width="280px">Ações</th>
   </tr>
  </thead>
  <tbody>
@@ -18,6 +19,7 @@
   <tr>
     <td>{{ ++$i }}</td>
     <td>{{ $user->name }}</td>
+    <td>{{ $user->cargo }}</td>
     <td>{{ $user->email }}</td>
     <td>
       @if(!empty($user->getRoleNames()))

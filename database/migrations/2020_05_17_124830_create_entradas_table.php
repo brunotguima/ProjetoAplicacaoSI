@@ -17,8 +17,6 @@ class CreateEntradasTable extends Migration
             $table->id();
             $table->unsignedBigInteger('veiculo_id');
             $table->foreign('veiculo_id')->references('id')->on('veiculos');
-            $table->unsignedBigInteger('saida_id');
-            $table->foreign('saida_id')->references('id')->on('saidas');
             $table->timestamps();
         });
     }
