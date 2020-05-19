@@ -54,14 +54,18 @@
     </a>
     @endif
 
-    <div class="right menu">
-      <button class="ui secondary basic button">
-      <a href="">{{Auth::user()->name}}</a>
-      </button>
-  <form action="/logout" method="post">
-    <input type="submit" class="ui secondary basic button" value="Logout">
-    {{ csrf_field() }}
-  </form>
+    <div class="ui right aligned dropdown item">
+      {{Auth::user()->name}}
+      <i class="dropdown icon"></i>
+      <div class="menu">
+        <div class="item">
+          <a href="{{ route('logout') }}"
+          onclick="event.preventDefault();
+                        document.getElementById('logout-form').submit();">
+           {{ __('Logout') }}
+          </a>
+        </div>
+      </div>
     </div>
   </div>
   @endif
