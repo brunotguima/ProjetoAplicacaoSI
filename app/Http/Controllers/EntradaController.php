@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Funcionario;
+use App\Entrada;
 use Illuminate\Http\Request;
 
-class FuncionarioController extends Controller
+class EntradaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class FuncionarioController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Funcionario  $funcionario
+     * @param  \App\Entrada  $entrada
      * @return \Illuminate\Http\Response
      */
-    public function show(Funcionario $funcionario)
+    public function show(Entrada $entrada)
     {
         //
     }
@@ -52,10 +52,10 @@ class FuncionarioController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Funcionario  $funcionario
+     * @param  \App\Entrada  $entrada
      * @return \Illuminate\Http\Response
      */
-    public function edit(Funcionario $funcionario)
+    public function edit(Entrada $entrada)
     {
         //
     }
@@ -64,10 +64,10 @@ class FuncionarioController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Funcionario  $funcionario
+     * @param  \App\Entrada  $entrada
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Funcionario $funcionario)
+    public function update(Request $request, Entrada $entrada)
     {
         //
     }
@@ -75,10 +75,10 @@ class FuncionarioController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Funcionario  $funcionario
+     * @param  \App\Entrada  $entrada
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Funcionario $funcionario)
+    public function destroy(Entrada $entrada)
     {
         //
     }

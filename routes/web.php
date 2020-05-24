@@ -18,9 +18,22 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/movimentacao', function () {
+    return view('movimentacao.create');
+});
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('/users/json/{user}', 'UserController@showJSON');
+
 Route::resource('veiculos', 'VeiculoController');
 
+// Route::group(['middleware' => ['auth']], function() {
+
+    Route::resource('roles','RoleController');
+
+    Route::resource('users','UserController');
+
+// });
