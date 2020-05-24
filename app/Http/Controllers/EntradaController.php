@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Entrada;
+use App\Saida;
+use App\Veiculo;
+use App\User;
 use Illuminate\Http\Request;
 
 class EntradaController extends Controller
@@ -33,9 +36,28 @@ class EntradaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $req)
     {
-        //
+        $request = json_decode($req->getContent());
+    
+        $saida = Saida::find((int)$request->saida_id);
+
+        $veiculo = Veiculo::find((int)$request->carro_id);
+        $veiculo->kmatual = (int)$req->km;
+        $veiculo->save();
+
+        $funcionario = User::find((int)$request->user_id);
+
+        $entrada = new Entrada();
+        $entrada->veiculo()->associate($veiculo);
+        $entrada->user()->associate($funcionario);
+        $entrada->save();
+
+        $saida->entrada()->associate($entrada);
+        
+        $saida->save();
+
+        return response()->json(["dados" => $entrada, "erros" => 0]);
     }
 
     /**
