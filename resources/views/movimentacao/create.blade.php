@@ -9,10 +9,6 @@
                     <button class="ui blue button" id="clear">Limpar</button>
                 </h1>
                 <input type="hidden" id="funcionario" name="funcionario_id" value="">
-                <input type="hidden" id="tipo" value="1">
-                <input type="hidden" id="created_at" name="created_at" value="">
-                <input type="hidden" id="ocorrencia" name="ocorrencia_id" value="1">
-                <input type="hidden" id="foto" name="foto" value="">
                 </h1>
                 <div class="ui very padded center aligned segment grid">
                     <div class="fluid content" id="feedback">
@@ -201,6 +197,7 @@
                     if(response.data.erros == 0) {
                         $('#txtOK').text('SAÍDA LIBERADA')
                         $.tab('change tab', 'ok');
+                        setTimeout(retornarInicio, 3000)
                     }else{
                         $('#cardResumoSaida .header').text(dados.user.name)
                         $('#cardResumoSaida .meta').text(moment(dados.created_at).format('DD/MM/YYYY hh:mm:ss'))
@@ -209,11 +206,13 @@
                         saida = dados.id
                         $.tab('change tab', 'entrada')
                     }
+                    //setTimeout(retornarInicio(), 3000)
                 }
             })
             .catch(error => {
                 $('#txtErro').text(error.message.toUpperCase())
                 $.tab('change tab', 'erro');
+                setTimeout(retornarInicio, 3000)
             })
         }
 
@@ -231,13 +230,34 @@
                     if(response.data.erros == 0) {
                         $('#txtOK').text('ENTRADA OK')
                         $.tab('change tab', 'ok');
+                        setTimeout(retornarInicio, 3000)
                     }
                 }
             })
             .catch(error => {
                 $('#txtErro').text(error.message.toUpperCase())
                 $.tab('change tab', 'erro');
+                setTimeout(retornarInicio, 3000)
             })
+        }
+
+        function limpaTela() {
+            $('#funcionario').val('')
+            $('#km').val('')
+            carro = undefined
+            saida = undefined
+            funcionario = undefined
+
+            $('#cardFuncionario').hide()
+            $('#cardCarro').hide()
+            $('#cardConfirma').hide()
+
+            $('#feedback').html('<h1>PASSE SEU CRACHÁ</h1>')
+        }
+
+        function retornarInicio() {
+            limpaTela()
+            $.tab('change tab', 'mov')
         }
 </script>
 
@@ -253,7 +273,6 @@
       document.querySelector('select').addEventListener('change', function(){
         	decoder.stop().play();
       });
-
 </script>
 
 @endsection
