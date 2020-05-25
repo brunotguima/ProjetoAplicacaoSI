@@ -15,10 +15,6 @@ use Illuminate\Support\Facades\Auth;
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/movimentacao', function () {
     return view('movimentacao.create');
 });
 

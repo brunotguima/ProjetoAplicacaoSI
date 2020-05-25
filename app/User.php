@@ -42,4 +42,8 @@ class User extends Authenticatable
     public function saidas() {
         return $this->hasMany('App\Saida');
     }
+    
+    public function entradas() {
+        return $this->hasMany('App\Entrada');
+    }
 }
