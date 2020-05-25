@@ -1,7 +1,6 @@
 <!-- Menu superior -->
 @if(Auth::check())
-<div class="ui pointing menu">
-
+<div class="ui sidebar inverted vertical menu">
   @if(Request::segment(1) == (''))
   <a href="/" class="active item" id="inicio">
     Inicio
@@ -52,21 +51,17 @@
   </a>
   @endif
 
-  <div class="ui right aligned dropdown item">
-    {{Auth::user()->name}}
-    <i class="dropdown icon"></i>
-    <div class="menu">
-      <div class="item">
-        <a href="{{ route('logout') }}" onclick="event.preventDefault();
+  <a class="item" href="{{ route('logout') }}" onclick="event.preventDefault();
                         document.getElementById('logout-form').submit();">
-          {{ __('Logout') }}
-        </a>
-      </div>
-    </div>
-  </div>
+    {{ __('Logout') }}
+  </a>
 </div>
+
+<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+  @csrf
+</form>
 @else
-<div class="ui pointing menu">
+<div class="ui sidebar inverted vertical menu">
   <a class="ui right aligned item" href="{{ route('login') }}" class="item">
     Login
   </a>
