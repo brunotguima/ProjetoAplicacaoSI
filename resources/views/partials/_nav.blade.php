@@ -23,11 +23,11 @@
   @endif
 
   @if(Request::segment(1) == ('movimentacao'))
-  <a href="/movimentacao" class="active item" id="movimentacoes">
+  <a href="/" class="active item" id="movimentacoes">
     Movimentações
   </a>
   @else
-  <a href="/movimentacao" class="item" id="movimentacoes">
+  <a href="/" class="item" id="movimentacoes">
     Movimentações
   </a>
   @endif
@@ -64,6 +64,12 @@
       </div>
     </div>
   </div>
+</div>
+@else
+<div class="ui pointing menu">
+  <a class="ui right aligned item" href="{{ route('login') }}" class="item">
+    Login
+  </a>
 </div>
 @endif
 <!--Fim menu superior -->
