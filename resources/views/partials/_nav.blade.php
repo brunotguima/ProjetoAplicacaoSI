@@ -11,6 +11,7 @@
   </a>
   @endif
 
+  @canany(['veiculo-list', 'veiculo-edit', 'veiculo-delete', 'veiculo-create'])
   @if(Request::segment(1) == ('veiculos'))
   <a href="/veiculos" class="active item" id="veiculos">
     Veiculos
@@ -20,6 +21,7 @@
     Veiculos
   </a>
   @endif
+  @endcanany
 
   @if(Request::segment(1) == ('movimentacao'))
   <a href="/" class="active item" id="movimentacoes">
@@ -31,6 +33,7 @@
   </a>
   @endif
 
+  @canany(['user-list', 'user-edit', 'user-delete', 'user-create'])
   @if(Request::segment(1) == ('users'))
   <a href="{{ route('users.index') }}" class="active item">
     Usuários
@@ -40,7 +43,9 @@
     Usuários
   </a>
   @endif
+  @endcanany
 
+  @canany(['role-list', 'role-edit', 'role-delete', 'role-create'])
   @if(Request::segment(1) == ('roles'))
   <a href="{{ route('roles.index') }}" class="active item">
     Tipos Func.
@@ -50,6 +55,7 @@
     Tipos Func.
   </a>
   @endif
+  @endcanany
 
   <a class="item" href="{{ route('logout') }}" onclick="event.preventDefault();
                         document.getElementById('logout-form').submit();">

@@ -17,6 +17,14 @@ class PermissionsSeeder extends Seeder
             'role-create',
             'role-edit',
             'role-delete',
+            'veiculo-list',
+            'veiculo-create',
+            'veiculo-edit',
+            'veiculo-delete',
+            'user-list',
+            'user-create',
+            'user-edit',
+            'user-delete',
          ];
     
         foreach ($permissions as $permission) {

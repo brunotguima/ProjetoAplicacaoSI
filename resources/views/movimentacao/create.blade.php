@@ -1,7 +1,7 @@
 @extends('main')
 
 @section('content')
-<div class="ui container">
+<div class="ui container" style="margin-top: 20px">
     <div class="ui bottom attached transition in fade tab" data-tab="mov" id="mov">
         <div class="ui two column stackable grid" id="gridMovimentacao">
             <div class="column">

@@ -36,7 +36,7 @@
                         @enderror
                     </div>
                 </div>
-                <div class="ui fluid large teal submit button">Login</div>
+                <input type="submit" class="ui fluid large teal submit button" value="Login">
             </div>
             @if (Route::has('password.request'))
             <a href="{{ route('password.request') }}">
