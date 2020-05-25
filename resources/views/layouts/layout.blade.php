@@ -13,7 +13,7 @@
         Menu
       </a>
     </div>
-    <div class="ui container">
+    <div class="ui fluid container">
       @include('./partials/_nav')
       @yield('content')
     </div>
