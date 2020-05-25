@@ -6,7 +6,7 @@
         <div class="ui two column stackable grid" id="gridMovimentacao">
             <div class="column">
                 <h1 class="ui header animated slideInLeft" id="alunos">
-                    <button class="ui blue button" id="clear">Limpar</button>
+                    <button class="ui blue button" id="clear" onclick="limpaTela()">Limpar</button>
                 </h1>
                 <input type="hidden" id="funcionario" name="funcionario_id" value="">
                 </h1>
