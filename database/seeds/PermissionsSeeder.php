@@ -25,6 +25,14 @@ class PermissionsSeeder extends Seeder
             'user-create',
             'user-edit',
             'user-delete',
+            'mecanico-list',
+            'mecanico-create',
+            'mecanico-edit',
+            'mecanico-delete',
+            'manutencao-list',
+            'manutencao-create',
+            'manutencao-edit',
+            'manutencao-delete',
          ];
     
         foreach ($permissions as $permission) {
