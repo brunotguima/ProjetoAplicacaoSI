@@ -1,4 +1,4 @@
-@extends('/layouts/layout')
+@extends('main')
 
 @section('content')
 <h2 class="ui dividing header">Criar Novo Usuário</h2>

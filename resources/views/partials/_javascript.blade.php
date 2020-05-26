@@ -15,5 +15,12 @@
 <script>
   $('select.dropdown').dropdown()
   $('.ui.dropdown').dropdown()
+  
+  $('.ui.left.sidebar').sidebar({
+    transition: 'overlay'
+  });
+  
+  $('.ui.left.sidebar')
+    .sidebar('attach events', '#menu');
 </script>
 @yield('javascript')

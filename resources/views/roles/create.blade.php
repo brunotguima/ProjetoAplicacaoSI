@@ -1,18 +1,7 @@
-@extends('/layouts/layout')
+@extends('main')
 
 @section('content')
-<h2 class="ui dividing header">Criar nova função</h2>
-
-@if (count($errors) > 0)
-    <div class="alert alert-danger">
-        <strong>Eita!</strong> Alguns problemas ocorreram.<br><br>
-        <ul>
-        @foreach ($errors->all() as $error)
-            <li>{{ $error }}</li>
-        @endforeach
-        </ul>
-    </div>
-@endif
+<h2 class="ui dividing header">Criar Novo Usuário</h2>
 
 {!! Form::open(array('route' => 'roles.store','method'=>'POST', 'class' => 'ui form')) !!}
     <div class="field">
