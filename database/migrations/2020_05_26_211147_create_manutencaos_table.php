@@ -15,6 +15,12 @@ class CreateManutencaosTable extends Migration
     {
         Schema::create('manutencaos', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->unsignedBigInteger('mecanico_id');
+            $table->foreign('mecanico_id')->references('id')->on('mecanicos');
+            $table->string('descricao');
+            $table->string('total');
             $table->timestamps();
         });
     }

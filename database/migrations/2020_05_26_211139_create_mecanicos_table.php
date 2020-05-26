@@ -15,6 +15,11 @@ class CreateMecanicosTable extends Migration
     {
         Schema::create('mecanicos', function (Blueprint $table) {
             $table->id();
+            $table->string('razaosocial');
+            $table->string('logradouro');
+            $table->string('bairro');
+            $table->string('numero');
+            $table->string('cidade');
             $table->timestamps();
         });
     }

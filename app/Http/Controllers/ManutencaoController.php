@@ -14,7 +14,9 @@ class ManutencaoController extends Controller
      */
     public function index()
     {
-        //
+        $manutencoes = Manutencao::all();
+
+        return view('manutencoes.index', compact('manutencoes'));
     }
 
     /**

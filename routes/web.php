@@ -55,7 +55,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/mecanicos/{mecanico}', 'MecanicoController@show')->name('mecanicos.show');
     Route::get('/mecanicos/{mecanico}/edit', 'MecanicoController@edit')->name('mecanicos.edit')->middleware('can:mecanico-edit');
     Route::patch('/mecanicos/{mecanico}', 'MecanicoController@update')->name('mecanicos.update');
-    Route::delete('/mecanicos/{mecanico}', 'MecanicoController@delete')->name('mecanicos.destroy')->middleware('can:mecanico-destroy');
+    Route::delete('/mecanicos/{mecanico}', 'MecanicoController@destroy')->name('mecanicos.destroy')->middleware('can:mecanico-destroy');
 
     Route::get('/manutencoes', 'ManutencaoController@index')->name('manutencoes.index')->middleware('can:manutencao-list');
     Route::get('/manutencoes/create', 'ManutencaoController@create')->name('manutencoes.create')->middleware('can:manutencao-create');
@@ -63,5 +63,5 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/manutencoes/{manutencao}', 'ManutencaoController@show')->name('manutencoes.show');
     Route::get('/manutencoes/{manutencao}/edit', 'ManutencaoController@edit')->name('manutencoes.edit')->middleware('can:manutencao-edit');
     Route::patch('/manutencoes/{manutencao}', 'ManutencaoController@update')->name('manutencoes.update');
-    Route::delete('/manutencoes/{manutencao}', 'ManutencaoController@delete')->name('manutencoes.destroy')->middleware('can:manutencao-destroy');
+    Route::delete('/manutencoes/{manutencao}', 'ManutencaoController@destroy')->name('manutencoes.destroy')->middleware('can:manutencao-destroy');
 });
