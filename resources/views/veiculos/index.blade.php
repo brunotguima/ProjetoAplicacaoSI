@@ -3,51 +3,56 @@
 @section('content')
 
 <div class="ui container">
-  
-<table class="ui selectable table">
-  <thead>
-    <tr>
-      <th>QRCode</th>
-      <th>Tipo</th>
-      <th>Marca</th>
-      <th>Modelo</th>
-      <th>Ano</th>
-      <th>Cor</th>
-      <th>Placa</th>
-      <th>Tanque</th>
-      <th>Renavam</th>
-      <th>KM Cadastro</th>
-      <th>KM Atual</th>
-      <th class="right aligned"></th>
-    </tr>
-  </thead>
-  <tbody>
-      @foreach ($veiculosCadastrados as $veiculo)
-      <tr>
-      <td><button class="blue button ui" onclick="qrcode({{$veiculo->id}},'{{$veiculo->modelo}}');">QR</button></td>
-          <td>{{$veiculo->tipo}}</td>
-          <td>{{$veiculo->marca}}</td>
-          <td>{{$veiculo->modelo}}</td>
-          <td>{{$veiculo->ano}}</td>
-          <td>{{$veiculo->cor}}</td>
-          <td>{{$veiculo->placa}}</td>
-          <td>{{$veiculo->tanque}}</td>
-          <td>{{$veiculo->renavam}}</td>
-          <td>{{$veiculo->kmcadastro}}</td>
-          <td>{{$veiculo->kmatual}}</td>
-          <td class="right aligned">
-              <button class="orange basic button ui"> <a href="{{route('veiculos.show',$veiculo->id)}}">Ver</a></button>
-              <button class="green basic button ui"> <a href="{{route('veiculos.edit',$veiculo->id)}}">Editar</a></button>
+  <div class="dividing header"></div>
+  <h2 class="ui dividing header">Gerenciamento de Veículos <a href="{{route('veiculos.create')}}"><i class="plus red icon" style="float: right"></i></a></h2>
+<div class="ui grid">
+
+  <div class="ui stackable  grid">
+  @foreach ($veiculosCadastrados as $veiculo)
+  <div class="four wide column">
+  <div class="ui card">
+    <div class="image">
+      @if($veiculo->tipo == 'Carro')
+      <img src="/images/Veiculos/carro.png">
+      @else 
+      <img src="/images/Veiculos/moto.png">
+      @endif
+    </div>
+    <div class="content">
+      <a class="header ui two row" style="height: 50px;">{{$veiculo->marca}} {{$veiculo->modelo}}</a>
+      <div class="meta">
+        <span>{{$veiculo->placa}}</span>
+      </div>
+      <div class="description">
+       <p>{{$veiculo->ano}}</p> 
+      </div>
+      <div class="description">
+       <p>{{$veiculo->cor}}</p> 
+      </div>
+      <div class="description">
+        <p>{{$veiculo->tipo}}</p> 
+       </div>
+    </div>
+    <div class="extra content">
+     <p>Quilometragem atual: {{$veiculo->kmatual}} KM</p> 
+    </div>
+    <div class="extra content center aligned page grid">
+      <button class="ui blue button" onclick="qrcode({{$veiculo->id}},'{{$veiculo->modelo}}');"><i class="qrcode icon"></i>QR Code</button>
+    </div>
+    <div class="extra content center aligned page grid">
+      <button class="orange basic button ui"> <a href="{{route('veiculos.show',$veiculo->id)}}"><i class="eye icon"></i></a></button>
+              <button class="green basic button ui"> <a href="{{route('veiculos.edit',$veiculo->id)}}"><i class="pencil alternate icon"></i></a></button>
               <form style="display: inline;" action="{{route('veiculos.destroy',$veiculo->id)}}" method="post">
                 {{csrf_field()}}
                 <input type="hidden" name="_method" value="delete">
-                <button type="submit" class="red basic button ui">Remover</button>
+                <button type="submit" class="red basic button ui"><i class="eraser icon"></i></button>
               </form>
-          </td>
-        </tr>
-      @endforeach
-  </tbody>
-</table>
+    </div>
+  </div>
+</div>
+  @endforeach
+</div>
+</div>
 </div>
 
 <div class="ui basic modal">
@@ -57,6 +62,7 @@
   <div class="content ui centered grid" id="divqrcode"></div>
   <div class="actions">
     <button class="ui blue basic cancel inverted button" onclick="imprimirQrcode();">Imprimir</button>
+    <button class="ui red basic cancel inverted button" onclick="fecharModal();">Fechar</button>
   </div>
 </div>
 
@@ -65,6 +71,10 @@
 @section('javascript')
 
 <script>
+function fecharModal(){
+    $('.ui.basic.modal').modal('hide');
+  }
+
 function qrcode(id, nome){
   $('#divqrcode').load('http://localhost:8000/api/veiculos/qrcode/'+id,function(){
     $('#nomeVeiculo').text(nome);

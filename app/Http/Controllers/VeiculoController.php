@@ -17,6 +17,13 @@ class VeiculoController extends Controller
     public function index()
     {
         $veiculosCadastrados = Veiculo::all();
+        foreach($veiculosCadastrados as $veiculo){
+            if($veiculo->tipo == 'C'){
+                $veiculo->tipo = 'Carro';
+            }else if($veiculo->tipo == 'M'){
+                $veiculo->tipo = 'Moto';
+            }
+        }
         return view ('veiculos/index',compact('veiculosCadastrados'));
     }
 
@@ -77,7 +84,12 @@ class VeiculoController extends Controller
      */
     public function show(Veiculo $veiculo)
     {
-        return response()->json($veiculo);
+        if($veiculo->tipo == 'C'){
+            $veiculo->tipo = 'Carro';
+        }else if($veiculo->tipo == 'M'){
+            $veiculo->tipo = 'Moto';
+        }
+        return view ('veiculos/show',compact('veiculo'));
     }
 
     /**

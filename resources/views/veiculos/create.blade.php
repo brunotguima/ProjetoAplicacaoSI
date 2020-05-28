@@ -2,98 +2,71 @@
 
 @section('content')
 
-
-<form class="form-horizontal" action="/veiculos" method="POST" >
+<div class="ui container">
+<form class="ui form" action="/veiculos" method="POST" >
   {{ csrf_field() }}
-    <fieldset>
+  <div class="dividing header"></div>
+  <h2 class="ui dividing header"><legend>Cadastro de Veículo</legend></h2>
+  <div class="dividing header"></div>
     
-    <legend>Cadastro de Veículo</legend>
     
-    <div class="form-group">
-      <label class="col-md-4 control-label" for="tipo">Selecione o Tipo do Veículo:</label>
-      <div class="col-md-4">
-        <select id="tipo" name="tipo" class="form-control">
-          <option value="carro">Carro</option>
-          <option value="moto">Moto</option>
+    <div class="field ui six grid">
+      <label for="tipo">Selecione o Tipo do Veículo:</label>
+        <select id="tipo" name="tipo" class="ui dropdown">
+          <option class="item" value="carro">Carro</option>
+          <option class="item" value="moto">Moto</option>
         </select>
-      </div>
     </div>
     
-    <div class="form-group">
-      <label class="col-md-4 control-label" for="marca">Marca:</label>  
-      <div class="col-md-4">
-      <input id="marca" name="marca" type="text" placeholder="Digite a marca" class="form-control input-md" required="">
-        
-      </div>
+    <div class="field ui six grid">
+      <label>Marca:</label>  
+      <input id="marca" name="marca" type="text" placeholder="Digite a marca" required="">
     </div>
     
-    <!-- Text input-->
-    <div class="form-group">
-      <label class="col-md-4 control-label" for="modelo">Digite o modelo:</label>  
-      <div class="col-md-4">
-      <input id="modelo" name="modelo" type="text" placeholder="Digite o modelo" class="form-control input-md" required="">
-        
-      </div>
+    <div class="field ui six grid">
+      <label for="modelo">Digite o modelo:</label>  
+      <input id="modelo" name="modelo" type="text" placeholder="Digite o modelo"  required="">
     </div>
     
-    <!-- Text input-->
-    <div class="form-group">
-      <label class="col-md-4 control-label" for="ano">Digite o ano:</label>  
-      <div class="col-md-4">
-      <input id="ano" name="ano" type="text" placeholder="ano" class="form-control input-md" required="">
-        
-      </div>
+    <div class="field ui six grid">
+      <label for="ano">Digite o ano:</label>  
+      <input id="ano" name="ano" type="text" placeholder="Digite o ano" required="">
     </div>
     
-    <!-- Text input-->
-    <div class="form-group">
-      <label class="col-md-4 control-label" for="cor">Digite a cor:</label>  
-      <div class="col-md-4">
-      <input id="cor" name="cor" type="text" placeholder="cor" class="form-control input-md" required="">
-        
-      </div>
+    <div class="field ui six grid">
+      <label for="cor">Digite a cor:</label>  
+      <input id="cor" name="cor" type="text" placeholder="Cor" required="">
     </div>
     
-    <!-- Text input-->
-    <div class="form-group">
-      <label class="col-md-4 control-label" for="renavam">Digite o renavam do veiculo:</label>  
-      <div class="col-md-4">
-      <input id="renavam" name="renavam" type="text" placeholder="renavam" class="form-control input-md" required="">
-        
-      </div>
+    <div class="field ui six grid">
+      <label for="renavam">Digite o renavam do veiculo:</label>  
+      <input id="renavam" name="renavam" type="text" placeholder="Renavam" required="">
     </div>
     
-    <!-- Text input-->
-    <div class="form-group">
-      <label class="col-md-4 control-label" for="kmcadastro">Digite a quilometragem atual:</label>  
-      <div class="col-md-4">
-      <input id="kmcadastro" name="kmcadastro" type="text" placeholder="KM" class="form-control input-md" required="">
-        
-      </div>
+    <div class="field ui six grid">
+      <label for="kmcadastro">Digite a quilometragem atual:</label>  
+      <input id="kmcadastro" name="kmcadastro" type="text" placeholder="KM" required="">
     </div>
     
-    <!-- Text input-->
-    <div class="form-group">
-      <label class="col-md-4 control-label" for="tanque">Digite a litragem do tanque:</label>  
-      <div class="col-md-4">
-      <input id="tanque" name="tanque" type="text" placeholder="Qtde em Litros" class="form-control input-md" required="">
-        
-      </div>
+    <div class="field ui six grid">
+      <label for="tanque">Digite a litragem do tanque:</label>  
+      <input id="tanque" name="tanque" type="text" placeholder="Qtde em Litros" required="">
     </div>
     
-    <!-- Text input-->
-    <div class="form-group">
-      <label class="col-md-4 control-label" for="placa">Digite a placa:</label>  
-      <div class="col-md-4">
-      <input id="placa" name="placa" type="text" placeholder="placa" class="form-control input-md" required="">
-        
-      </div>
+    <div class="field ui six grid">
+      <label for="placa">Digite a placa:</label>  
+      <input id="placa" name="placa" type="text" placeholder="Placa"  required="">
     </div>
 
-    <input type="submit" value="Enviar">
+    <input class="ui button" type="submit" value="Enviar">
     
-    </fieldset>
     </form>
     
+  </div>
+@endsection
 
+@section('javascript')
+$('select.dropdownTipo')
+  .dropdown()
+;
 @endsection
