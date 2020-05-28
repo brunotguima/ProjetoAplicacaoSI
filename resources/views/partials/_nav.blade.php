@@ -1,74 +1,121 @@
-<header class="ui menuemcima">
-  <div class="ui container">
-    <!-- Menu superior -->
-    @if(Auth::check())
-  <div class="ui pointing menu">
+<!-- Menu superior -->
+@if(Auth::check())
+<div class="ui inverted left vertical sidebar labeled icon menu" style="overflow: visible !important;">
+  @if(Request::segment(1) == (''))
+  <a href="/" class="active item" id="inicio">
+    <i class="home icon"></i>
+    Inicio
+  </a>
+  @else
+  <a href="/" class="item" id="inicio">
+    <i class="home icon"></i>
+    Inicio
+  </a>
+  @endif
 
-    @if(Request::segment(1) == (''))
-    <a href="/" class="active item" id="inicio">
-      Inicio
-    </a>
-    @else 
-    <a href="/" class="item" id="inicio">
-      Inicio
-    </a>
-    @endif
+  @canany(['veiculo-list', 'veiculo-edit', 'veiculo-delete', 'veiculo-create'])
+  @if(Request::segment(1) == ('veiculos'))
+  <a href="/veiculos" class="active item" id="veiculos">
+    <i class="car icon"></i>
+    Veiculos
+  </a>
+  @else
+  <a href="/veiculos" class="item" id="veiculos">
+    <i class="car icon"></i>
+    Veiculos
+  </a>
+  @endif
+  @endcanany
 
-    @if(Request::segment(1) == ('veiculos'))
-    <a href="/veiculos" class="active item" id="veiculos">
-      Veiculos
-    </a>
-    @else 
-    <a href="/veiculos" class="item" id="veiculos">
-      Veiculos
-    </a>
-    @endif 
+  @if(Request::segment(1) == (''))
+  <a href="/" class="active item" id="movimentacoes">
+    <i class="exchange icon"></i>
+    Movimentações
+  </a>
+  @else
+  <a href="/" class="item" id="movimentacoes">
+    <i class="exchange icon"></i>
+    Movimentações
+  </a>
+  @endif
 
-    @if(Request::segment(1) == ('movimentacao'))
-    <a href="/movimentacao" class="active item" id="movimentacoes">
-      Movimentações
-    </a>
-    @else 
-    <a href="/movimentacao" class="item" id="movimentacoes">
-      Movimentações
-    </a>
-    @endif
+  @canany(['user-list', 'user-edit', 'user-delete', 'user-create'])
+  @if(Request::segment(1) == ('users'))
+  <a href="{{ route('users.index') }}" class="active item">
+    <i class="users icon"></i>
+    Usuários
+  </a>
+  @else
+  <a href="{{ route('users.index') }}" class="item">
+    <i class="users icon"></i>
+    Usuários
+  </a>
+  @endif
+  @endcanany
 
-    @if(Request::segment(1) == ('users'))
-    <a href="{{ route('users.index') }}" class="active item">
-      Usuários
-    </a>
-    @else 
-    <a href="{{ route('users.index') }}" class="item">
-      Usuários
-    </a>
-    @endif
+  @canany(['role-list', 'role-edit', 'role-delete', 'role-create'])
+  @if(Request::segment(1) == ('roles'))
+  <a href="{{ route('roles.index') }}" class="active item">
+    <i class="tasks icon"></i>
+    Tipos Func.
+  </a>
+  @else
+  <a href="{{ route('roles.index') }}" class="item">
+    <i class="tasks icon"></i>
+    Tipos Func.
+  </a>
+  @endif
+  @endcanany
 
-    @if(Request::segment(1) == ('roles'))
-    <a href="{{ route('roles.index') }}" class="active item">
-      Tipos Func.
-    </a>
-    @else 
-    <a href="{{ route('roles.index') }}" class="item">
-      Tipos Func.
-    </a>
-    @endif
+  @canany(['mecanico-list', 'mecanico-edit', 'mecanico-delete', 'mecanico-create'])
+  @if(Request::segment(1) == ('mecanicos'))
+  <a href="{{ route('mecanicos.index') }}" class="active item">
+    <i class="wrench icon"></i>
+    Mecânicos
+  </a>
+  @else
+  <a href="{{ route('mecanicos.index') }}" class="item">
+    <i class="wrench icon"></i>
+    Mecânicos
+  </a>
+  @endif
+  @endcanany
 
-    <div class="ui right aligned dropdown item">
-      {{Auth::user()->name}}
-      <i class="dropdown icon"></i>
-      <div class="menu">
-        <div class="item">
-          <a href="{{ route('logout') }}"
-          onclick="event.preventDefault();
+  @canany(['manutencao-list', 'manutencao-edit', 'manutencao-delete', 'manutencao-create'])
+  @if(Request::segment(1) == ('manutencoes'))
+  <a href="{{ route('manutencoes.index') }}" class="active item">
+    <i class="cogs icon"></i>
+    Manutenções
+  </a>
+  @else
+  <a href="{{ route('manutencoes.index') }}" class="item">
+    <i class="cogs icon"></i>
+    Manutenções
+  </a>
+  @endif
+  @endcanany
+
+  <div class="ui dropdown item">
+    <i class="user icon"></i>
+    {{Auth::user()->name}}
+    <i class="dropdown icon"></i>
+    <div class="menu">
+        <a class="inverted item" href="{{ route('logout') }}" onclick="event.preventDefault();
                         document.getElementById('logout-form').submit();">
-           {{ __('Logout') }}
-          </a>
-        </div>
-      </div>
+          {{ __('Logout') }}
+        </a>
     </div>
   </div>
-  @endif
-  </div>
-  </header>
-  <!--Fim menu superior -->
+</div>
+
+<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+  @csrf
+</form>
+@else
+<div class="ui inverted left vertical sidebar menu" style="overflow: visible !important;">
+  <a href="{{ route('login') }}" class="item">
+    Login
+  </a>
+</div>
+@endif
+<!--Fim menu superior -->
