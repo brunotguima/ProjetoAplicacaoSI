@@ -1,34 +1,25 @@
 @extends('/layouts/layout')
 
 @section('content')
-<div class="row">
-    <div class="col-lg-12 margin-tb">
-        <div class="pull-left">
-            <h2> Ver Tipo de Funcionário</h2>
-        </div>
-        <div class="pull-right">
-            <a class="btn btn-primary" href="{{ route('roles.index') }}"> Retornar</a>
-        </div>
-    </div>
-</div>
+<h2 class="ui dividing header">Ver Usuário</h2>
 
-
-<div class="row">
-    <div class="col-xs-12 col-sm-12 col-md-12">
-        <div class="form-group">
-            <strong>Nome:</strong>
-            {{ $role->name }}
-        </div>
+<div class="ui card">
+    <div class="image" style="background-color: grey;">
     </div>
-    <div class="col-xs-12 col-sm-12 col-md-12">
-        <div class="form-group">
-            <strong>Permissões:</strong>
-            @if(!empty($rolePermissions))
-                @foreach($rolePermissions as $v)
-                    <label class="label label-success">{{ $v->name }},</label>
-                @endforeach
-            @endif
+
+    <div class="content">
+        <a class="header">{{ $role->name }}</a>
+    </div>
+    <div class="extra content">
+        <label>Permissões:</label>
+        <br>
+        @if(!empty($rolePermissions))
+        @foreach($rolePermissions as $v)
+        <div class="row" style="margin-top: 3px">
+            <label class="ui green horizontal label">{{ $v->name }}</label>
         </div>
+        @endforeach
+        @endif
     </div>
 </div>
 @endsection

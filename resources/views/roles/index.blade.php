@@ -1,55 +1,38 @@
-@extends('/layouts/layout')
+@extends('main')
 
 @section('content')
-<div class="row">
-    <div class="col-lg-12 margin-tb">
-        <div class="pull-left">
-            <h2>Gerenciamento de Tipos de Funcionários</h2>
-        </div>
-        <div class="pull-right">
-        @can('role-create')
-            <a class="btn btn-success" href="{{ route('roles.create') }}"> Criar novo Tipo</a>
-            @endcan
-        </div>
-    </div>
-</div>
+<h2 class="ui dividing header">Gerenciamento de Tipos de Funcionário <a href="{{route('users.create')}}"><i class="plus red icon"
+            style="float: right"></i></a></h2>
 
-
-@if ($message = Session::get('success'))
-    <div class="alert alert-success">
-        <p>{{ $message }}</p>
-    </div>
-@endif
-
-
-<table class="table table-bordered">
-  <tr>
-     <th>No</th>
-     <th>Nome</th>
-     <th width="280px">Action</th>
-  </tr>
-    @foreach ($roles as $key => $role)
-    <tr>
-        <td>{{ ++$i }}</td>
-        <td>{{ $role->name }}</td>
-        <td>
-            <a class="btn btn-info" href="{{ route('roles.show',$role->id) }}">Ver</a>
-            @can('role-edit')
-                <a class="btn btn-primary" href="{{ route('roles.edit',$role->id) }}">Editar</a>
-            @endcan
-            @can('role-delete')
-                {!! Form::open(['method' => 'DELETE','route' => ['roles.destroy', $role->id],'style'=>'display:inline']) !!}
-                    {!! Form::submit('Deletar', ['class' => 'btn btn-danger']) !!}
+<table class="ui table">
+    <thead>
+        <tr>
+            <th>No</th>
+            <th>Nome</th>
+            <th width="280px">Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach ($roles as $key => $role)
+        <tr>
+            <td>{{ ++$i }}</td>
+            <td>{{ $role->name }}</td>
+            <td>
+                <a class="ui blue button" href="{{ route('roles.show',$role->id) }}">Ver</a>
+                @can('role-edit')
+                <a class="ui green button" href="{{ route('roles.edit',$role->id) }}">Editar</a>
+                @endcan
+                @can('role-delete')
+                {!! Form::open(['method' => 'DELETE','route' => ['roles.destroy', $role->id],'style'=>'display:inline'])
+                !!}
+                {!! Form::submit('Deletar', ['class' => 'ui red button']) !!}
                 {!! Form::close() !!}
-            @endcan
-        </td>
-    </tr>
-    @endforeach
+                @endcan
+            </td>
+        </tr>
+        @endforeach
+    </tbody>
 </table>
 
-
 {!! $roles->render() !!}
-
-
-<p class="text-center text-primary"><small>Tutorial by ItSolutionStuff.com</small></p>
 @endsection

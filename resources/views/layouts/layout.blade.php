@@ -8,12 +8,12 @@
 <body>
   <div class="pusher">
     <div class="ui top attached demo menu">
-      <a class="item" onclick="$('.ui.sidebar').sidebar('toggle')">
+      <a class="item" id="menu">
         <i class="sidebar icon"></i>
         Menu
       </a>
     </div>
-    <div class="ui fluid container">
+    <div class="ui container">
       @include('./partials/_nav')
       @yield('content')
     </div>
