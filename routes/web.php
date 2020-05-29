@@ -23,6 +23,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/users/json/{user}', 'UserController@showJSON');
+Route::get('/veiculos/json/{id}', 'VeiculoController@showJSON');
 
 Route::group(['middleware' => ['auth']], function() {
     Route::get('/veiculos', 'VeiculoController@index')->name('veiculos.index')->middleware('can:veiculo-list');

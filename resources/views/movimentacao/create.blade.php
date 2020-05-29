@@ -17,7 +17,7 @@
                 </div>
                 <br>
                 <div class="ui two cards">
-                    <div class="card" id="cardFuncionario" style="display: none">
+                    <div class="card" id="cardFuncionario" name="cardFuncionario" style="display: none">
                         <div class="content">
                             <div class="header">
                                 Matheus Luiz de Oliveira
@@ -31,7 +31,7 @@
                         </div>
                     </div>
 
-                    <div class="card" id="cardCarro" style="display: none">
+                    <div class="card" id="cardCarro" name="cardCarro" style="display: none">
                         <div class="content">
                             <div class="header">
                                 FIAT - Fiorino 1.4 EVO Flex
@@ -108,7 +108,7 @@
                             <input type="text" name="km" id="km">
                         </div>
                         <div class="ui two buttons">
-                            <button class="ui negative basic huge button">
+                            <button class="ui negative basic huge button" onclick="limpaTela()">
                                 <i class="ui cancel icon"></i>
                                 Cancelar
                             </button>
@@ -146,6 +146,7 @@
 @endsection
 
 @section('scripts')
+
 <script>
     var funcionario, carro, res, saida;
 
@@ -158,21 +159,23 @@
                 axios.get('http://localhost:8000/users/json/'+code)
                 .then(response => {
                     if(response.status == 200) {
-                        this.dados = response.data
-                        $('#cardFuncionario .header').text(dados.nome)
-                        $('#cardFuncionario .meta').text(dados.id)
-                        $('#cardFuncionario .description').text(dados.cargo)
+                        this.dados = response.data;
+                        console.log(dados)
+                        $('#cardFuncionario .header').text(dados.name);
+                        $('#cardFuncionario .meta').text(dados.id);
+                        $('#cardFuncionario .description').text(dados.cargo);
                         funcionario = dados.id;
-                        $('#cardFuncionario').show('slow')
-                        $('#funcionario').val(code)
-                        $('#feedback').html('<h1>PASSE O QR DO CARRO</h1>')
+                        $('#cardFuncionario').show('slow');
+                        $('#funcionario').val(code);
+                        $('#feedback').html('<h1>PASSE O QR DO CARRO</h1>');
                     }
                 })
             }else{
-                axios.get('http://localhost:8000/veiculos/'+code)
+                axios.get('http://localhost:8000/veiculos/json/'+code)
                 .then(response => {
                     if(response.status == 200) {
                         this.dados = response.data
+                        console.log(dados)
                         $('#cardCarro .header').text(dados.marca + ' - ' + dados.modelo)
                         $('#cardCarro .meta').text(dados.placa)
                         $('#cardCarro .description').text(dados.kmatual + ' Km')

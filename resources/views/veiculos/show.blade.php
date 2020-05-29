@@ -1,10 +1,12 @@
 @extends('layouts/layout')
 
 @section('content')
-
 <div class="ui container">
     <div class="ui grid centered">
         <div class="dividing header"> </div>
+        <div class="ui top sixteen wide column center aligned" style="background-color: rgb(41, 41, 41);color: #FFFFFF;">
+        <h2>Informações do Veículo</h2>
+        </div>
     <div class="ui items">
         <div class="item">
           <div class="image">
@@ -46,7 +48,11 @@
         </div>
       </div>
     </div>
-    <canvas id="myChart" width="30" height="30"></canvas>
+    <div class="ui placeholder segment">
+      <canvas id="myChart" width="30" height="30"></canvas>
+    </div>
+
+    
 </div>
 
 

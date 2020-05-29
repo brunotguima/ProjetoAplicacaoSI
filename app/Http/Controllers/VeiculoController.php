@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Veiculo;
+use App\Entrada;
+use App\Saida;
 use Illuminate\Http\Request;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
@@ -84,12 +86,13 @@ class VeiculoController extends Controller
      */
     public function show(Veiculo $veiculo)
     {
+        $entradas = Entrada::All()->where('veiculo_id',(int)$veiculo->id)->first();
         if($veiculo->tipo == 'C'){
             $veiculo->tipo = 'Carro';
         }else if($veiculo->tipo == 'M'){
             $veiculo->tipo = 'Moto';
         }
-        return view ('veiculos/show',compact('veiculo'));
+        return view ('veiculos/show',compact('veiculo','entradas'));
     }
 
     /**
@@ -144,5 +147,11 @@ class VeiculoController extends Controller
     public function createQR($id)
     {
         return QrCode::size(250)->generate($id);
+    }
+
+    public function showJSON($id)
+    {
+        $veiculo = Veiculo::find($id);
+        return response()->json($veiculo);
     }
 }

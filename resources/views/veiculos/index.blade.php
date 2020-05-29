@@ -40,12 +40,12 @@
       <button class="ui blue button" onclick="qrcode({{$veiculo->id}},'{{$veiculo->modelo}}');"><i class="qrcode icon"></i>QR Code</button>
     </div>
     <div class="extra content center aligned page grid">
-      <button class="orange basic button ui"> <a href="{{route('veiculos.show',$veiculo->id)}}"><i class="eye icon"></i></a></button>
-              <button class="green basic button ui"> <a href="{{route('veiculos.edit',$veiculo->id)}}"><i class="pencil alternate icon"></i></a></button>
+      <button class="orange icon button ui"> <a href="{{route('veiculos.show',$veiculo->id)}}"><i class="eye icon"></i></a></button>
+              <button class="green icon button ui"> <a href="{{route('veiculos.edit',$veiculo->id)}}"><i class="pencil alternate icon"></i></a></button>
               <form style="display: inline;" action="{{route('veiculos.destroy',$veiculo->id)}}" method="post">
                 {{csrf_field()}}
                 <input type="hidden" name="_method" value="delete">
-                <button type="submit" class="red basic button ui"><i class="eraser icon"></i></button>
+                <button type="submit" class="red icon button ui"><i class="eraser icon"></i></button>
               </form>
     </div>
   </div>
