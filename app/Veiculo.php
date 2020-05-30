@@ -17,4 +17,9 @@ class Veiculo extends Model
     {
         return $this->hasMany('App\Entrada');
     }
+
+    public function manutencoes()
+    {
+        return $this->hasMany('App\Manutencao');
+    }
 }
