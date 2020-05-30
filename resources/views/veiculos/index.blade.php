@@ -13,9 +13,9 @@
   <div class="ui card">
     <div class="image">
       @if($veiculo->tipo == 'Carro')
-      <img src="/images/Veiculos/carro.png">
+      <img src="{{asset('/images/Veiculos/carro.png')}}">
       @else 
-      <img src="/images/Veiculos/moto.png">
+      <img src="{{asset('/images/Veiculos/moto.png')}}">
       @endif
     </div>
     <div class="content">
