@@ -32,7 +32,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/veiculos/{veiculo}', 'VeiculoController@show')->name('veiculos.show');
     Route::get('/veiculos/{veiculo}/edit', 'VeiculoController@edit')->name('veiculos.edit')->middleware('can:veiculo-edit');
     Route::patch('/veiculos/{veiculo}', 'VeiculoController@update')->name('veiculos.update');
-    Route::delete('/veiculos/{veiculo}', 'VeiculoController@delete')->name('veiculos.destroy')->middleware('can:veiculo-destroy');
+    Route::delete('/veiculos/{veiculo}', 'VeiculoController@destroy')->name('veiculos.destroy')->middleware('can:veiculo-destroy');
 
     Route::get('/roles', 'RoleController@index')->name('roles.index')->middleware('can:role-list');
     Route::get('/roles/create', 'RoleController@create')->name('roles.create')->middleware('can:role-create');

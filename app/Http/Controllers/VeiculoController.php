@@ -7,6 +7,7 @@ use App\Entrada;
 use App\Saida;
 use Illuminate\Http\Request;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
+use Illuminate\Support\Facades\DB;
 
 class VeiculoController extends Controller
 {
@@ -19,14 +20,14 @@ class VeiculoController extends Controller
     public function index()
     {
         $veiculosCadastrados = Veiculo::all();
-        foreach($veiculosCadastrados as $veiculo){
-            if($veiculo->tipo == 'C'){
+        foreach ($veiculosCadastrados as $veiculo) {
+            if ($veiculo->tipo == 'C') {
                 $veiculo->tipo = 'Carro';
-            }else if($veiculo->tipo == 'M'){
+            } else if ($veiculo->tipo == 'M') {
                 $veiculo->tipo = 'Moto';
             }
         }
-        return view ('veiculos/index',compact('veiculosCadastrados'));
+        return view('veiculos/index', compact('veiculosCadastrados'));
     }
 
     /**
@@ -48,7 +49,7 @@ class VeiculoController extends Controller
     public function store(Request $request)
     {
 
-        
+
         $request->validate([
             'tipo' => 'required|max:5',
             'marca' => 'required',
@@ -61,21 +62,32 @@ class VeiculoController extends Controller
             'kmcadastro' => 'required'
         ]);
 
-            $veiculo = new Veiculo();
-            $veiculo->tipo = $request->tipo;
-            $veiculo->marca = $request->marca;
-            $veiculo->modelo = $request->modelo;
-            $veiculo->ano = $request->ano;
-            $veiculo->cor = $request->cor;
-            $veiculo->placa = $request->placa;
-            $veiculo->tanque = $request->tanque;
-            $veiculo->renavam = $request->renavam;
-            $veiculo->kmcadastro = $request->kmcadastro;
-            $veiculo->kmatual = $request->kmcadastro;
-            $veiculo->save();
+        $veiculo = new Veiculo();
+        $veiculo->tipo = $request->tipo;
+        $veiculo->marca = $request->marca;
+        $veiculo->modelo = $request->modelo;
+        $veiculo->ano = $request->ano;
+        $veiculo->cor = $request->cor;
+        $veiculo->placa = $request->placa;
+        $veiculo->tanque = $request->tanque;
+        $veiculo->renavam = $request->renavam;
+        $veiculo->kmcadastro = $request->kmcadastro;
+        $veiculo->kmatual = $request->kmcadastro;
+
+        if ($request->hasFile('imagem')) {
+
+            $nomeFinal = $veiculo->tipo . $veiculo->placa;
 
 
-        return redirect('/veiculos')->with('sucess','Veiculo cadastrado com sucesso!');
+                    $image = $nomeFinal . '.' . $request->imagem->getClientOriginalExtension();
+                    $request->imagem->move(public_path() . '\Images\veiculos', $image);
+
+                    $veiculo->imagem = $image;
+                    $veiculo->save();
+                } else {
+                    $veiculo->save();
+                }
+        return redirect('/veiculos')->with('sucess', 'Veiculo cadastrado com sucesso!');
     }
 
     /**
@@ -86,13 +98,25 @@ class VeiculoController extends Controller
      */
     public function show(Veiculo $veiculo)
     {
-        $entradas = Entrada::All()->where('veiculo_id',(int)$veiculo->id)->first();
-        if($veiculo->tipo == 'C'){
+        $entradas = DB::table('entradas')
+            ->where('veiculo_id', (int) $veiculo->id)
+            ->join('users', 'entradas.user_id', '=', 'users.id')
+            ->select('entradas.*', 'users.name', 'users.email', 'users.cargo')
+            ->get();
+
+        $saidas = DB::table('saidas')
+            ->where('veiculo_id', (int) $veiculo->id)
+            ->join('users', 'saidas.user_id', '=', 'users.id')
+            ->select('saidas.*', 'users.name', 'users.email', 'users.cargo')
+            ->get();
+
+        if ($veiculo->tipo == 'C') {
             $veiculo->tipo = 'Carro';
-        }else if($veiculo->tipo == 'M'){
+        } else if ($veiculo->tipo == 'M') {
             $veiculo->tipo = 'Moto';
         }
-        return view ('veiculos/show',compact('veiculo','entradas'));
+
+        return view('veiculos/show', compact('veiculo', 'entradas', 'saidas'));
     }
 
     /**
@@ -127,7 +151,7 @@ class VeiculoController extends Controller
         ]);
         Veiculo::whereId($id)->update($validatedData);
 
-        return redirect('/veiculos')->with('sucesso','Veiculo atualizado com sucesso!');
+        return redirect('/veiculos')->with('sucesso', 'Veiculo atualizado com sucesso!');
     }
 
     /**
@@ -141,7 +165,7 @@ class VeiculoController extends Controller
         $veiculoDelete = Veiculo::find($id);
         $veiculoDelete->delete();
 
-        return redirect('/veiculos')->with('sucess','O veiculo foi deletado com sucesso!');
+        return redirect('/veiculos')->with('sucess', 'O veiculo foi deletado com sucesso!');
     }
 
     public function createQR($id)
