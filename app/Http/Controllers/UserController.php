@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use App\User;
 use Spatie\Permission\Models\Role;
 use DB;
-use Hash;
+use Illuminate\Support\Facades\Hash;
 use Auth;
 use Illuminate\Support\Arr;
     

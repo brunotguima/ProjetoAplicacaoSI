@@ -12,10 +12,15 @@
   <div class="four wide column">
   <div class="ui card">
     <div class="image">
+      @if($veiculo->imagem != NULL)
+      <img width="500" height="500" src="{{asset('/Images/veiculos')}}/{{$veiculo->imagem}}">
+
+      @else
       @if($veiculo->tipo == 'Carro')
-      <img src="/images/Veiculos/carro.png">
+      <img width="500" height="500" src="/images/Veiculos/carro.png">
       @else 
-      <img src="/images/Veiculos/moto.png">
+      <img width="500" height="500" src="/images/Veiculos/moto.png">
+      @endif
       @endif
     </div>
     <div class="content">
