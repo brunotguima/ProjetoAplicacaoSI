@@ -19,6 +19,7 @@ class CreateManutencaosTable extends Migration
             $table->foreign('user_id')->references('id')->on('users');
             $table->unsignedBigInteger('mecanico_id');
             $table->foreign('mecanico_id')->references('id')->on('mecanicos');
+            $table->date('data');
             $table->string('descricao');
             $table->string('total');
             $table->timestamps();

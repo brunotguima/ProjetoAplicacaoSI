@@ -26,7 +26,10 @@
                     <td>
                         <a class="ui blue button" href="{{ route('manutencoes.show',$manutencao->id) }}">Ver</a>
                         <a class="ui green button" href="{{ route('manutencoes.edit',$manutencao->id) }}">Editar</a>
-                        <a class="ui red button" href="{{ route('manutencoes.edit',$usmanutencaoer->id) }}">Deletar</a>
+                        {!! Form::open(['method' => 'DELETE','route' => ['manutencoes.destroy',
+                        $mecanico->id],'style'=>'display:inline']) !!}
+                        {!! Form::submit('Deletar', ['class' => 'ui red button']) !!}
+                        {!! Form::close() !!}
                     </td>
                 </tr>
                 @endforeach

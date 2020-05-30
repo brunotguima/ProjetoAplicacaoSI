@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Manutencao;
+use App\Veiculo;
+use App\Mecanico;
 use Illuminate\Http\Request;
 
 class ManutencaoController extends Controller
@@ -26,7 +28,10 @@ class ManutencaoController extends Controller
      */
     public function create()
     {
-        //
+        $veiculos = Veiculo::pluck('modelo', 'modelo');
+        $mecanicos = Mecanico::pluck('razaosocial', 'razaosocial');
+
+        return view('manutencoes.create', compact('veiculos', 'mecanicos'));
     }
 
     /**
@@ -37,7 +42,24 @@ class ManutencaoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $manutencao = new Manutencao();
+
+        $mecanico = Mecanico::find($request->mecanico_id);
+
+        $veiculo = Veiculo::find($request->veiculo_id);
+
+        $manutencao->data = $request->data;
+        $manutencao->descricao = $request->descricao;
+        $manutencao->total = $request->total;
+                
+        $manutencao->mecanico()->associate($mecanico);
+        $manutencao->veiculo()->associate($veiculo);
+
+        $manutencao->save();
+        
+
+        return redirect()->route('manutencoes.index')
+            ->with('success','Manutenção cadastrada com Sucesso!!');
     }
 
     /**
