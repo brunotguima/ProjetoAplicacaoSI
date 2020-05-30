@@ -212,8 +212,8 @@
                     //setTimeout(retornarInicio(), 3000)
                 }
             })
-            .catch(error => {
-                $('#txtErro').text(error.message.toUpperCase())
+            .catch(error => {                
+                $('#txtErro').text(error.message.toUpperCase()) 
                 $.tab('change tab', 'erro');
                 setTimeout(retornarInicio, 3000)
             })
@@ -237,10 +237,21 @@
                     }
                 }
             })
-            .catch(error => {
-                $('#txtErro').text(error.message.toUpperCase())
+            .catch(error => {               
+                kmOK = error.response.data.errors.km[0] != ''
+                
                 $.tab('change tab', 'erro');
-                setTimeout(retornarInicio, 3000)
+
+                if (kmOK) { 
+                    $('#txtErro').text(error.response.data.errors.km[0].toUpperCase())
+                    setTimeout(function() {
+                        $.tab('change tab', 'entrada');
+                    }, 3000)
+                }else{
+                    $('#txtErro').text(error.message.toUpperCase())
+                    setTimeout(retornarInicio, 3000)
+                }    
+               
             })
         }
 

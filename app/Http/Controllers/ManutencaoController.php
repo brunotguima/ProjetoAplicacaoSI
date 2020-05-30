@@ -103,8 +103,6 @@ class ManutencaoController extends Controller
      */
     public function update(Request $request, Manutencao $manutencao)
     {
-        // dd($request);
-        
         $mecanico = Mecanico::find($request->mecanico_id);
         $veiculo = Veiculo::find($request->veiculo_id);
         
