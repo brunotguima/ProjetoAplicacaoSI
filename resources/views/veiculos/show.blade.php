@@ -95,11 +95,11 @@
             <td><label class="ui green horizontal label">{{ $saida->cargo }}</label></td>
             <td>
               <p>
-                @for($i=0;$i<10;$i++) {{$saida->created_at[$i]}} @endfor </p>
+                {{Carbon\Carbon::parse($saida->created_at)->format('d/m/Y')}} </p>
             </td>
             <td>
               <p>
-                @for($i=11;$i<19;$i++) {{$saida->created_at[$i]}} @endfor </p>
+                {{Carbon\Carbon::parse($saida->created_at)->format('h:m')}} </p>
             </td>
             <td>
                 @if($saida->entrada_id == NULL)
@@ -142,11 +142,11 @@
             <td><label class="ui green horizontal label">{{ $entrada->cargo }}</label></td>
             <td>
               <p>
-                @for($i=0;$i<10;$i++) {{$entrada->created_at[$i]}} @endfor </p>
+                {{Carbon\Carbon::parse($saida->created_at)->format('d/m/Y')}} </p>
             </td>
             <td>
               <p>
-                @for($i=11;$i<19;$i++) {{$entrada->created_at[$i]}} @endfor </p>
+                {{Carbon\Carbon::parse($saida->created_at)->format('h:m')}} </p>
             </td>
           </tr>
           @endforeach
@@ -156,11 +156,9 @@
 
     </div>
     <div class="ui bottom tab segment" data-tab="third">
-      Third
+        <!--<canvas id="myChart" width="30" height="30"></canvas> -->
     </div>
   </div>
-
-  <!--<canvas id="myChart" width="30" height="30"></canvas> -->
 </div>
 
 
@@ -209,7 +207,7 @@
           label: 'Movimentações',
           backgroundColor: 'transparent',
           borderColor: 'green',
-          data: [12, 16, 8, 18, 15, 20, 13, 12, 16, 19, 15, 16]
+          data:[12, 16, 8, 18, 15, 20, 13, 12, 16, 19, 15, 16]
         }
       ]
     },
