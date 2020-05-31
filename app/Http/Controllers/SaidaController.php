@@ -114,17 +114,17 @@ class SaidaController extends Controller
     }
 
     public function teste(Request $request) {
-        $inicio = Carbon::parse($request->dataini);
-        $fim = Carbon::parse($request->datafim);
+        $inicio = Carbon::parse('2020-05-20');
+        $fim = Carbon::parse('2020-05-30');
         
-        $periodo = CarbonPeriod::create($request->dataini, '1 day', $request->datafim);
+        $periodo = CarbonPeriod::create('2020-05-20', '1 day', '2020-05-31');
         
         $data = array();
         
         foreach($periodo as $i => $date) {
             $saidas = DB::table('saidas')->whereDate('created_at', $date)->get();
 
-            $data[$date->toDateString()] = $saidas->count();
+            $data[$date->format('d/m/Y')] = $saidas->count();
         }
         return response()->json($data);
     }
