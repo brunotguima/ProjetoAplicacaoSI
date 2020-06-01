@@ -65,4 +65,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/manutencoes/{manutencao}/edit', 'ManutencaoController@edit')->name('manutencoes.edit')->middleware('can:manutencao-edit');
     Route::patch('/manutencoes/{manutencao}', 'ManutencaoController@update')->name('manutencoes.update');
     Route::delete('/manutencoes/{manutencao}', 'ManutencaoController@destroy')->name('manutencoes.destroy')->middleware('can:manutencao-destroy');
+
+    Route::get('/teste', 'SaidaController@teste')->name('saidas.teste');
+    Route::get('/grafico', 'SaidaController@grafico');
 });

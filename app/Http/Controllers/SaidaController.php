@@ -6,6 +6,9 @@ use App\Saida;
 use App\Veiculo;
 use App\User;
 use Illuminate\Http\Request;
+use DB;
+use Carbon\Carbon;
+use Carbon\CarbonPeriod;
 
 class SaidaController extends Controller
 {
@@ -108,5 +111,25 @@ class SaidaController extends Controller
     public function destroy(Saida $saida)
     {
         //
+    }
+
+    public function teste(Request $request) {
+        $inicio = Carbon::parse($request->dataini);
+        $fim = Carbon::parse($request->datafim);
+        
+        $periodo = CarbonPeriod::create($request->dataini, '1 day', $request->datafim);
+        
+        $data = array();
+        
+        foreach($periodo as $i => $date) {
+            $saidas = DB::table('saidas')->whereDate('created_at', $date)->get();
+
+            $data[$date->toDateString()] = $saidas->count();
+        }
+        return response()->json($data);
+    }
+
+    public function grafico() {
+        return view('movimentacao.grafico');
     }
 }
