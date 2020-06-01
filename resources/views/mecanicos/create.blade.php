@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="ui container" style="margin-top: 20px">
-        <h2 class="ui dividing header">Cadastrar Mecanico</h2>
+        <h2 class="ui dividing header">Cadastrar Mecânico</h2>
 
     <form class="ui form" action="{{ route('mecanicos.store') }}" method="POST">
         @csrf    
