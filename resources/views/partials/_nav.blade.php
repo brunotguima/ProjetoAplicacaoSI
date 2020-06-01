@@ -95,6 +95,20 @@
   @endif
   @endcanany
 
+  @canany(['ver-estatisticas'])
+  @if(Request::segment(1) == ('estatistica'))
+  <a href="{{ route('estatisticas.index') }}" class="active item">
+    <i class="chart line icon"></i>
+    Estatisticas
+  </a>
+  @else
+  <a href="{{ route('estatisticas.index') }}" class="item">
+    <i class="chart line icon"></i>
+    Estatisticas
+  </a>
+  @endif
+  @endcanany
+
   <div class="ui dropdown item">
     <i class="user icon"></i>
     {{Auth::user()->name}}

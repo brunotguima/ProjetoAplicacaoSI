@@ -11,7 +11,7 @@
                 <tr>
                     <th>Mecânico</th>
                     <th>Carro</th>
-                    <th>Data/Hora</th>
+                    <th>Data</th>
                     <th>Preço Total</th>
                     <th width="280px">Ações</th>
                 </tr>
@@ -19,14 +19,17 @@
             <tbody>
                 @foreach($manutencoes as $manutencao)
                 <tr>
-                    <td>{{$manutencao->mecanico->nome}}</td>
-                    <td>{{$manutencao->carro->modelo}}</td>
-                    <td>{{$manutencao->created_at}}</td>
+                    <td>{{$manutencao->mecanico->razaosocial}}</td>
+                    <td>{{$manutencao->veiculo->modelo}}</td>
+                    <td>{{Carbon\Carbon::parse($manutencao->created_at)->format('d/m/Y')}}</td>
                     <td>R$ {{$manutencao->total}}</td>
                     <td>
                         <a class="ui blue button" href="{{ route('manutencoes.show',$manutencao->id) }}">Ver</a>
                         <a class="ui green button" href="{{ route('manutencoes.edit',$manutencao->id) }}">Editar</a>
-                        <a class="ui red button" href="{{ route('manutencoes.edit',$usmanutencaoer->id) }}">Deletar</a>
+                        {!! Form::open(['method' => 'DELETE','route' => ['manutencoes.destroy',
+                        $manutencao->id],'style'=>'display:inline']) !!}
+                        {!! Form::submit('Deletar', ['class' => 'ui red button']) !!}
+                        {!! Form::close() !!}
                     </td>
                 </tr>
                 @endforeach

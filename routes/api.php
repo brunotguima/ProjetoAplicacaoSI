@@ -21,3 +21,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::apiResource('saidas', 'SaidaController');
 Route::apiResource('entradas', 'EntradaController');
 Route::get('veiculos/qrcode/{id}', 'VeiculoController@createQR');
+Route::get('users/qrcode/{id}', 'UserController@createQR');

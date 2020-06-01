@@ -26,6 +26,8 @@ class CreateVeiculosTable extends Migration
             $table->double('kmcadastro');
             $table->double('kmatual');
             $table->string('qrcode')->nullable();
+            $table->string('imagem')->nullable();
+            $table->string('disponivel')->nullable();
             $table->timestamps();
         });
     }

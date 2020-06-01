@@ -6,6 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Mecanico extends Model
 {
+    public function manutencoes()
+    {
+        return $this->hasMany('App\Manutencao');
+    }
+
+    
     /**
      * The attributes that are mass assignable.
      *

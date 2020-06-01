@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Manutencao;
+use App\Veiculo;
+use App\Mecanico;
 use Illuminate\Http\Request;
+use Auth;
 
 class ManutencaoController extends Controller
 {
@@ -26,7 +29,10 @@ class ManutencaoController extends Controller
      */
     public function create()
     {
-        //
+        $veiculos = Veiculo::pluck('modelo', 'id');
+        $mecanicos = Mecanico::pluck('razaosocial', 'id');
+
+        return view('manutencoes.create', compact('veiculos', 'mecanicos'));
     }
 
     /**
@@ -37,7 +43,27 @@ class ManutencaoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $manutencao = new Manutencao();
+
+        // dd($request);
+
+        $mecanico = Mecanico::find($request->mecanico_id);
+
+        $veiculo = Veiculo::find($request->veiculo_id);
+
+        $manutencao->data = $request->data;
+        $manutencao->descricao = $request->descricao;
+        $manutencao->total = $request->total;
+                
+        $manutencao->mecanico()->associate($mecanico);
+        $manutencao->veiculo()->associate($veiculo);
+        $manutencao->user()->associate(Auth::user());
+
+        $manutencao->save();
+        
+
+        return redirect()->route('manutencoes.index')
+            ->with('success','Manutenção cadastrada com Sucesso!!');
     }
 
     /**
@@ -48,7 +74,7 @@ class ManutencaoController extends Controller
      */
     public function show(Manutencao $manutencao)
     {
-        //
+        return view('manutencoes.show',compact('manutencao'));
     }
 
     /**
@@ -59,7 +85,13 @@ class ManutencaoController extends Controller
      */
     public function edit(Manutencao $manutencao)
     {
-        //
+        $veiculos = Veiculo::all();
+        $mecanicos = Mecanico::all();
+        
+        $manutencaoVeiculo = $manutencao->veiculo->pluck('modelo', 'id');
+        $manutencaoMecanico = $manutencao->mecanico->pluck('razaosocial', 'id');
+
+        return view('manutencoes.edit', compact('manutencao', 'veiculos', 'mecanicos', 'manutencaoVeiculo', 'manutencaoMecanico'));
     }
 
     /**
@@ -71,7 +103,18 @@ class ManutencaoController extends Controller
      */
     public function update(Request $request, Manutencao $manutencao)
     {
-        //
+        $mecanico = Mecanico::find($request->mecanico_id);
+        $veiculo = Veiculo::find($request->veiculo_id);
+        
+        $manutencao->mecanico()->associate($mecanico);
+        $manutencao->veiculo()->associate($veiculo);
+        $manutencao->data = $request->data;
+        $manutencao->descricao = $request->descricao;
+        $manutencao->total = $request->total;
+        $manutencao->save();
+
+        return redirect()->route('manutencoes.index')
+        ->with('success', 'A Manutenção foi atualizada com sucesso!');
     }
 
     /**
@@ -82,6 +125,8 @@ class ManutencaoController extends Controller
      */
     public function destroy(Manutencao $manutencao)
     {
-        //
+        $manutencao->delete();
+        return redirect()->route('manutencoes.index')
+        ->with('success', 'A Manutenção foi deletada com sucesso!');
     }
 }

@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="ui container">
-<form class="ui form" action="/veiculos" method="POST" >
+<form class="ui form" action="/veiculos" method="POST" enctype="multipart/form-data">
   {{ csrf_field() }}
   <div class="dividing header"></div>
   <h2 class="ui dividing header"><legend>Cadastro de Veículo</legend></h2>
@@ -58,15 +58,16 @@
       <input id="placa" name="placa" type="text" placeholder="Placa"  required="">
     </div>
 
+    <div class="field ui six grid">
+      <label for="imagem">
+          <i class="file icon"></i>
+          Insira uma Imagem <span>(Opcional)</label>
+      <input class="ui icon button" type="file" name="imagem" id="file" accept="image/*">
+  </div>
+
     <input class="ui button" type="submit" value="Enviar">
     
     </form>
     
   </div>
-@endsection
-
-@section('javascript')
-$('select.dropdownTipo')
-  .dropdown()
-;
 @endsection

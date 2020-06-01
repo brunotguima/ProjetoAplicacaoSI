@@ -38,6 +38,12 @@ class EntradaController extends Controller
      */
     public function store(Request $req)
     {
+        $quilometragem = Veiculo::find($req->carro_id)->kmatual;
+
+        $req->validate([
+            'km' => 'required|gte:' . $quilometragem
+        ]);
+        
         $request = json_decode($req->getContent());
     
         $saida = Saida::find((int)$request->saida_id);

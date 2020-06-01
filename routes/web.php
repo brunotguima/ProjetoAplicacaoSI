@@ -23,6 +23,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/users/json/{user}', 'UserController@showJSON');
+Route::get('/veiculos/json/{id}', 'VeiculoController@showJSON');
 
 Route::group(['middleware' => ['auth']], function() {
     Route::get('/veiculos', 'VeiculoController@index')->name('veiculos.index')->middleware('can:veiculo-list');
@@ -31,7 +32,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/veiculos/{veiculo}', 'VeiculoController@show')->name('veiculos.show');
     Route::get('/veiculos/{veiculo}/edit', 'VeiculoController@edit')->name('veiculos.edit')->middleware('can:veiculo-edit');
     Route::patch('/veiculos/{veiculo}', 'VeiculoController@update')->name('veiculos.update');
-    Route::delete('/veiculos/{veiculo}', 'VeiculoController@delete')->name('veiculos.destroy')->middleware('can:veiculo-destroy');
+    Route::delete('/veiculos/{veiculo}', 'VeiculoController@destroy')->name('veiculos.destroy')->middleware('can:veiculo-destroy');
 
     Route::get('/roles', 'RoleController@index')->name('roles.index')->middleware('can:role-list');
     Route::get('/roles/create', 'RoleController@create')->name('roles.create')->middleware('can:role-create');
@@ -64,4 +65,8 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/manutencoes/{manutencao}/edit', 'ManutencaoController@edit')->name('manutencoes.edit')->middleware('can:manutencao-edit');
     Route::patch('/manutencoes/{manutencao}', 'ManutencaoController@update')->name('manutencoes.update');
     Route::delete('/manutencoes/{manutencao}', 'ManutencaoController@destroy')->name('manutencoes.destroy')->middleware('can:manutencao-destroy');
+
+    Route::get('/grafico/{veiculo}', 'VeiculoController@grafico')->name('veiculos.grafico');
+    Route::get('/estatistica', 'EstatisticaController@index')->name('estatisticas.index')->middleware('can:ver-estatisticas');
+    Route::get('/estatistica/json', 'EstatisticaController@geraGrafico')->name('estatisticas.geraGrafico');
 });

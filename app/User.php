@@ -46,4 +46,8 @@ class User extends Authenticatable
     public function entradas() {
         return $this->hasMany('App\Entrada');
     }
+
+    public function manutencoes() {
+        return $this->hasMany('App\Manutencao');
+    }
 }

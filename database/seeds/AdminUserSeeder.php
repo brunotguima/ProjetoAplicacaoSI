@@ -29,5 +29,21 @@ class AdminUserSeeder extends Seeder
         $role->syncPermissions($permissions);
    
         $user->assignRole([$role->id]);
+
+        $user = User::create([
+            'id' => 104514,
+            'name' => 'Bruno Guimarães',
+            'email' => 'brunotguima@admin.com',
+            'cargo' => 'Programador',
+            'password' => bcrypt('123456')
+        ]);
+  
+        $role = Role::create(['name' => 'Programador']);
+   
+        $permissions = Permission::pluck('id', 'id')->all();
+  
+        $role->syncPermissions($permissions);
+   
+        $user->assignRole([$role->id]);
     }
 }

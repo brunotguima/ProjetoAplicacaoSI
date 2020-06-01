@@ -33,6 +33,7 @@ class PermissionsSeeder extends Seeder
             'manutencao-create',
             'manutencao-edit',
             'manutencao-destroy',
+            'ver-estatisticas'
          ];
     
         foreach ($permissions as $permission) {
