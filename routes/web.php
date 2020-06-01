@@ -66,6 +66,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::patch('/manutencoes/{manutencao}', 'ManutencaoController@update')->name('manutencoes.update');
     Route::delete('/manutencoes/{manutencao}', 'ManutencaoController@destroy')->name('manutencoes.destroy')->middleware('can:manutencao-destroy');
 
-    Route::get('/teste', 'SaidaController@teste')->name('saidas.teste');
-    Route::get('/grafico', 'SaidaController@grafico');
+    Route::get('/grafico/{veiculo}', 'VeiculoController@grafico')->name('veiculos.grafico');
+    Route::get('/estatistica', 'EstatisticaController@index')->name('estatisticas.index')->middleware('can:ver-estatisticas');
+    Route::get('/estatistica/json', 'EstatisticaController@geraGrafico')->name('estatisticas.geraGrafico');
 });

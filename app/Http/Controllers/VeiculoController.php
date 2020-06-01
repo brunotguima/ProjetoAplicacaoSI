@@ -8,6 +8,8 @@ use App\Saida;
 use Illuminate\Http\Request;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
+use Carbon\CarbonPeriod;
 
 class VeiculoController extends Controller
 {
@@ -23,8 +25,8 @@ class VeiculoController extends Controller
         foreach ($veiculosCadastrados as $veiculo) {
 
             $saidasRealizadas = Saida::all()
-            ->where('entrada_id', NULL)
-            ->where('veiculo_id', $veiculo->id);
+                ->where('entrada_id', NULL)
+                ->where('veiculo_id', $veiculo->id);
 
 
             if ($saidasRealizadas->count() != 0) {
@@ -32,17 +34,18 @@ class VeiculoController extends Controller
             } else {
                 $veiculo->disponivel = true;
             }
-       //dd($saidasRealizadas);
+            //dd($saidasRealizadas);
             unset($saidasRealizadas);
+
+            if ($veiculo->tipo == 'C') {
+                $veiculo->tipo = 'Carro';
+            } else if ($veiculo->tipo == 'M') {
+                $veiculo->tipo = 'Moto';
+            }
         }
 
-        if ($veiculo->tipo == 'C') {
-            $veiculo->tipo = 'Carro';
-        } else if ($veiculo->tipo == 'M') {
-            $veiculo->tipo = 'Moto';
-        }
 
-       //dd($veiculosCadastrados);
+        //dd($veiculosCadastrados);
         return view('veiculos/index', compact('veiculosCadastrados'));
     }
 
@@ -114,6 +117,7 @@ class VeiculoController extends Controller
      */
     public function show(Veiculo $veiculo)
     {
+
         $entradas = DB::table('entradas')
             ->where('veiculo_id', (int) $veiculo->id)
             ->join('users', 'entradas.user_id', '=', 'users.id')
@@ -210,5 +214,24 @@ class VeiculoController extends Controller
             ->get();
 
         return response()->json(["entradas" => $entradas, "saidas" => $saidas]);
+    }
+
+    public function grafico($id)
+    {
+        $inicio = Carbon::now()->subDays(7);
+        $fim = Carbon::now();
+
+        $periodo = CarbonPeriod::create($inicio->toDateString(), '1 day', $fim->toDateString());
+
+        $data = array();
+
+        foreach ($periodo as $i => $date) {
+            $saidas = DB::table('saidas')
+                ->where('veiculo_id', $id)
+                ->whereDate('created_at', $date)
+                ->get();
+            $data[$date->format('d/m/Y')] = $saidas->count();
+        }
+        return response()->json($data);
     }
 }
